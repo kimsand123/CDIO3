@@ -1,10 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
-<script>
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="functions.js"></script>
+
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="format.css">
     <title>Operatør Login</title>
@@ -15,15 +14,15 @@
 
         <p3> Gruppe 17 </p3><br> <br>
 
-        <form method="get" action="5_eks.htm">
+        <form id="LoginForm">
             <ft1>Brugernavn </ft1>
-            <input class=normal type="text" name="Brugernavn">
+            <input id="usernameField" class=normal type="text" name="Brugernavn">
             <br>
             <ft1>Kodeord </ft1>
-            <input class=normal type="password" name="Kodeord">
+            <input id="passwordField" class=normal type="password" name="Kodeord">
             <br>
             <br>
-            <input class=btn type="submit" value="Send data">
+            <input id="submitButton" class=btn type="submit" value="Send data">
         </form>
     </div>
 </body>
