@@ -1,11 +1,14 @@
-ï»¿<!DOCTYPE html>
+<%@ include file="shared/doc_type.jsp"%>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="format.css">
-    <title>Opret bruger</title>
+<%@ include file="shared/meta.jsp"%>
+<%@ include file="shared/css.jsp"%>
+<title>Operatør Login</title>
 </head>
 <body>
+<%@ include file="shared/header.jsp"%>
+
+	<!-- CONTENT - START -->
     <style>
         label {
             display: block;
@@ -41,9 +44,12 @@
 
             <span style="display: block; margin-top: 1rem;">
                 <input class="btn" type="reset" value="Slet">
-                <input class="btn" type="submit" value="Gem Ã¦ndringer">
+                <input class="btn" type="submit" value="Gem ændringer">
             </span>
         </form>
     </div>
+    
+    <!-- CONTENT - END -->
+	<%@ include file="shared/footer.jsp"%>
 </body>
 </html>
