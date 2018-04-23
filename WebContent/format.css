@@ -1,0 +1,114 @@
+﻿@charset "UTF-8";
+
+.page-container {
+    margin: 3rem auto;
+    max-width: 800px;
+}
+
+body {
+    font-family: "Centyre Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+/*tabel*/
+#users {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    #users td, #users th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #users tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #users tr:hover {
+        background-color: #ddd;
+    }
+
+    #users th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+    }
+/*inputfields*/
+input.normal {
+    border-radius: 16px;
+    font-size: 12px;
+    height: 16px;
+    border: 1px solid black;
+    width: 150px;
+    padding: 5px;
+    box-shadow: inset 1px 2px 1px -1px rgba(0,0,0,1.0);
+}
+
+input.edit {
+    border-radius: 12px;
+    height: 25px;
+    background-color: #91fb00; /*green*/
+    border: 2px solid black
+}
+
+input.delete {
+    border-radius: 12px;
+    height: 25px;
+    background-color: #ff7979; /*red*/
+    border: 2px solid black
+}
+
+/*button*/
+.btn {
+    background: #3498db;
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    border-radius: 60px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 4px 8px 4px 8px;
+    border-top: solid #7fc5ff 1px;
+    border-right: solid #0077ff 2px;
+    border-bottom: solid #0077ff 2px;
+    border-left: solid #7fc5ff 2px;
+}
+
+    .btn:hover {
+        background: #3cb0fd;
+        background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    }
+
+/*fieldtext*/
+/*SKA DØ?*/
+ft1 {
+    font-size: 18px
+}
+
+p {
+    font-size: 60px;
+    text-align: center;
+}
+
+p2 {
+    font-weight: bold;
+    font-size: 40px;
+    align-self: center;
+}
+
+p3 {
+    font-weight: bold;
+    font-size: 30px;
+    align-self: center;
+}
+
+/*Frame around elements */
+div {
+    /*width: 320px;*/
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 12px;
+    box-shadow: 5px 10px 8px #c0c0c0;
+    margin: 0;
+}

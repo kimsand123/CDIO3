@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="format.css">
+    <title>Brugeradministration</title>
+</head>
+<body>
+
+    <div class="page-container">
+        <ft1>
+            Menu
+            <a href="file:///C:/Workspaces/2.%20Semester/Opgaver/HTML/WebContent/BrugerAdministration.html">Brugeradministration</a> | <a href="">logud
+        </ft1></a> <br> <br>
+
+        <p2>Bruger Administration</p2> <br>
+        <br>
+
+        <a href="file:///C:/Workspaces/2.%20Semester/Opgaver/HTML/WebContent/OpretBruger.html"><ft1> Opret ny bruger</ft1> </a>
+        <br>
+        <br>
+
+        <table id="users">
+            <tr>
+                <th>BrugerID</th>
+                <th>BrugerNavn</th>
+                <th>Rolle</th>
+                <th>Fornavn</th>
+                <th>Efternavn</th>
+                <!--<th>Vej</th>
+                <th>Nummer</th>
+                <th>Postnummer</th>
+                <th>By</th>-->
+            </tr>
+
+            <!--<tr>
+
+                <td>BrugerID</td>
+                <td>BrugerNavn</td>
+                <td>Rolle</td>
+                <td>Fornavn</td>
+                <td>Efternavn</td>
+                <td>Vej</td>
+                <td>Nummer</td>
+                <td>Postnummer</td>
+                <td>By</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>-->
+        </table>
+    </div>
+</body>
+</html>
+
+<!--LOADER JQUERY-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    var array = [
+        { uid: "12354", uname: "GurliGris1", roles: "Gud1", fname: "Hanne1", lname: "Kaffekande1" },
+        { uid: "12354", uname: "GurliGris2", roles: "Gud2", fname: "Hanne2", lname: "Kaffekande2" },
+        { uid: "12354", uname: "GurliGris3", roles: "Gud3", fname: "Hanne3", lname: "Kaffekande3" },
+        { uid: "12354", uname: "GurliGris4", roles: "Gud4", fname: "Hanne4", lname: "Kaffekande4" },
+        { uid: "12354", uname: "GurliGris5", roles: "Gud5", fname: "Hanne5", lname: "Kaffekande5" }
+    ];
+
+    $(function () {
+
+        var table = $("table#users");
+        var tbody = table.find('tbody');
+
+        array.forEach(function (data) {
+
+            console.log(data);
+
+            tbody.append('<tr>');
+            tbody.append('<td>' + data.uid + '</td>');
+            tbody.append('<td>' + data.uname + '</td>');
+            tbody.append('<td>' + data.roles + '</td>');
+            tbody.append('<td>' + data.fname + '</td>');
+            tbody.append('<td>' + data.lname + '</td>');
+            tbody.append('</tr>');
+
+        });
+
+        //;
+
+        //console.log();
+
+        /*
+        table.find('tbody').append($('<tr>')
+                .append($('<td>').append($('<img>').attr('src', 'img.png').text('Image cell')
+                    )
+                )
+            );*/
+
+    });
+</script>

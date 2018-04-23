@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="format.css">
+    <title>Opret bruger</title>
+</head>
+<body>
+    <style>
+        label {
+            display: block;
+            padding: 1rem 0 0.1rem 0;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+    </style>
+
+    <div class="page-container">
+
+        <form method="get" action="5_eks.htm">
+            <h2> Opret bruger </h2>
+
+            <label>BrugerID:</label>
+            <input type="text" name="" />
+
+            <label>Brugernavn:</label>
+            <input type="text" name="" />
+
+            <label>Fornavn:</label>
+            <input type="text" name="" />
+
+            <label>Efternavn:</label>
+            <input type="text" name="" />
+
+            <label>Roller:</label>
+            <input type="checkbox" name="" value="1" />Administrator
+            <input type="checkbox" name="" value="2" />Bruger
+
+            <label>Aktiv:</label>
+            <input type="radio" name="Aktiv" value="Ja">Ja <input type="radio" name="Aktiv" value="Nej">Nej
+
+            <span style="display: block; margin-top: 1rem;">
+                <input class="btn" type="reset" value="Slet">
+                <input class="btn" type="submit" value="Gem ændringer">
+            </span>
+        </form>
+    </div>
+</body>
+</html>
