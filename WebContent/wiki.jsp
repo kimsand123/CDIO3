@@ -45,10 +45,9 @@
 
 				
 				<h1>Endpoints so far</h1>
-				<div><a href="rest/user" target="_blank">/rest/user</a></div>
+				<div><a href="rest/user" target="_blank">/rest/user</a>: Operationer på 1 user</div>				
+				<div><a href="rest/users" target="_blank">/rest/users</a>: Operationer på flere users</div>
 				
-
-
 				<!-- CONTENT - END -->
 			</div>
 			<div class="col-2"></div>
