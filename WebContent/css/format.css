@@ -4,4 +4,6 @@ label{
 	font-weight: bold;
 }
 
+body{margin-top: 20px;}
+
 h1.page_header{font-size: 2rem; margin-bottom 2rem;}

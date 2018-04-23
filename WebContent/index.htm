@@ -31,8 +31,10 @@
 			</div>
 			<div class="col-8">
 				<!-- CONTENT - START -->
+				<div class="card card-body bg-light">
+				
 				<h1 id="page_title" class="page_header"></h1>
-				<div id="content"></div>
+				<div id="content"></div></div>
 				<!-- CONTENT - END -->
 			</div> 
 
@@ -57,7 +59,10 @@
 
 	<script>
 		$(function() {
-			
+			// first load = login page
+			$("#page_title").text("Log ind");	
+			$("#content").load("login.htm");
+			 
 			// event handler for menu buttons when clicked!
 			$(".menu").on("click", function(event) {
 
@@ -68,6 +73,7 @@
 
 				switch (menu_choice) {
 				case 'login':
+					page_title = "Log ind";
 					page_to_load = "login.htm";
 					break;
 				case 'createUser':
