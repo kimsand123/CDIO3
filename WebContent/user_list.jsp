@@ -10,24 +10,10 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-2">col1</div>
-			<div class="col-8">
-				<!-- CONTENT - START -->
-<div class="container">
-		<div class="row">
 			<div class="col-2"></div>
 			<div class="col-8">
-
-				<h1>Rediger en bruger</h1>
-
-				<div class="alert alert-success" role="alert">This is a
-					success alert check it out!</div>
-				<div class="alert alert-danger" role="alert">This is a danger
-					alert check it out!</div>
-
-
-
-
+				<!-- CONTENT - START -->
+				<h1>Liste over brugere</h1>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -55,13 +41,9 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
-			<div class="col-2"></div>
-		</div>
-	</div>
 				<!-- CONTENT - END -->
 			</div>
-			<div class="col-2">col3</div>
+			<div class="col-2"></div>
 		</div>
 	</div>
 
@@ -69,14 +51,8 @@
 	<%@ include file="shared/page_js.jsp"%>
 
 	<script>
-	
-	
-	
 		$(function() {
-
-			alert("hej");
-			});
-	
+		});
 	</script>
 </body>
 </html>
