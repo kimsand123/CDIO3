@@ -1,29 +1,45 @@
-
-
-<table class="table table-hover">
+<table id="user-list" class="table table-hover">
 	<thead>
 		<tr>
-			<th scope="col">BrugerID</th>
 			<th scope="col">BrugerNavn</th>
+			<th scope="col">INI</th>
+			<th scope="col">CPR</th>
+			<th scope="col">Kodeord</th>
 			<th scope="col">Roller</th>
-			<th scope="col">Fornavn</th>
-			<th scope="col">Efternavn</th>
 		</tr>
 	</thead>
-	<tbody>
-		<tr>
-			<td>123123</td>
-			<td>Mark</td>
-			<td>Kok</td>
-			<td>Hanne</td>
-			<td>Madsen</td>
-		</tr>
-		<tr>
-			<td>123123</td>
-			<td>Mark</td>
-			<td>Kok</td>
-			<td>Hanne</td>
-			<td>Madsen</td>
-		</tr>
+	<tbody>		
 	</tbody>
 </table>
+
+<script>
+	$(function() {
+
+		var list = $("#user-list tbody");
+		
+		var users = [			
+			{uid: "Frederik", ini: "FF", cpr: "1212121212", pass: "kode", roles: "admin, gøgler"},
+			{uid: "Elias", ini: "EE", cpr: "1212121212", pass: "kode", roles: "admin, gøgler, bager"},
+			{uid: "Kim", ini: "KK", cpr: "1212121212", pass: "kode", roles: "admin, gøgler, løber"},
+			{uid: "Nicolai", ini: "NN", cpr: "1212121212", pass: "kode", roles: "admin"},
+			{uid: "Kasper", ini: "KK", cpr: "1212121212", pass: "kode", roles: "Kinder"},
+			{uid: "Hjalte", ini: "HH", cpr: "1212121212", pass: "kode", roles: "Hemmelig"}];	
+		
+		users.forEach(function(user) {			  
+			
+			var s = "<tr>";
+			s += "<td>"+user.uid+"</td>";
+			s += "<td>"+user.ini+"</td>";
+			s += "<td>"+user.cpr+"</td>";
+			s += "<td>"+user.pass+"</td>";
+			s += "<td>"+user.roles+"</td>";
+			s += "</tr>";
+			
+			list.append(s);
+			});
+	});
+</script>
+
+
+
+
