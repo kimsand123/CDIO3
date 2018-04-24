@@ -59,13 +59,16 @@
 
 	<script>
 		$(function() {
+			//TODO: Fix
+			var number = Math.random(); //hack: else pages will be cached and you can't see your changes!
+			
 			// first load = login page
 			$("#page_title").text("Log ind");	
-			$("#content").load("login.htm");
+			$("#content").load("login.htm?id=" + number);
 			 
 			// event handler for menu buttons when clicked!
 			$(".menu").on("click", function(event) {
-
+				
 				var menu_choice = $(this).data("menu");
 
 				var page_title = "";
@@ -78,30 +81,30 @@
 					break;
 				case 'createUser':
 					page_title = "Opret ny bruger";
-					page_to_load = "user_create.htm?id=1";
+					page_to_load = "user_create.htm?id=" + number;
 					break;
 				case 'editUser': 
 					page_title = "Rediger bruger";
-					page_to_load = "user_edit.htm?id=1";
+					page_to_load = "user_edit.htm?id=" + number;
 					break;
 				case 'deleteUser':
 					page_title = "Slet bruger";
-					page_to_load = "user_delete.htm";
+					page_to_load = "user_delete.htm?id=" + number;
 					break;
 				case 'showUsers':
 					page_title = "Liste over brugere";
-					page_to_load = "user_list.htm?id=1";
+					page_to_load = "user_list.htm?id=" + number;
 					break;
 				case 'logOff':
 					page_title = "Log af";
-					page_to_load = "login.htm";
+					page_to_load = "login.htm?id=" + number;
 					break;
 				case 'wiki':
 					page_title = "Wiki";
-					page_to_load = "wiki.htm";
+					page_to_load = "wiki.htm?id=" + number;
 					break;
 				default:
-					page_to_load = "login.htm";
+					page_to_load = "login.htm?id=" + number;
 				}
 				  
 				$("#page_title").text(page_title);				
