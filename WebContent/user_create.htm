@@ -1,41 +1,84 @@
+<script>
+(document).ready(function() { // Sikrer sig at dokumentet er indlæst, 
+	   // før click handlers håndteres
+$('#createUser').click(function() { //Sætter en click handler på knappen
+var data = $('#OpretBruger').serializeJSON();
+	$.ajax({				//Indleder et asynkront ajax kald
+		data : data,
+		url : 'rest/OpretBruger',	//specificerer endpointet				      
+		contentType : 'application/json',
+		type : 'POST',	//Typen af HTTP requestet (GET er default)
+		      
+	success : function(data){//Funktion der skal udføres når data er skrevet
+		if (data==="true"){
+			var returnData = $('#IDPssword').
+			$.ajax({
+				
+				
+				type : 'GET',
+			success : function(data2)
+			})
+			
+			//get userpassword and userid
+			//$('#UserIDText').html(""); 
+			//$('#UserIDText').html(userID);
+			//$('#passwordText').html(""); 
+			//$('#passwordText').html(password);
+			
+			
+		}else{
+			//hvis fejl
+			$('#mydiv').html(""); //Manipulerer #mydiv.
+			$('#mydiv').html("kvaddernosse");			
+		}	
+	}
+	});
+	return false; //for at undgå at knappen poster data (default behavior).
+});
+});
 
-
-    <style>
-        label {
-            display: block;
-            padding: 1rem 0 0.1rem 0;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-    </style>
-
+</script>
     <div class="page-container">
+		<!--Når der trykkes på gem bruger, sendes Brugernavn, initialer og CPR 			-->
+		<!-- samt hvilke roller der er valgt, til backend. Derefter skal der 			-->
+		<!-- hentes password og brugerID og disse skal vises nederst i tekst felter 	-->
+		<!-- samtidig med at man får en besked om at brugeren er blevet oprettet.		-->
+		<!-- Så trykker man på den nyfremkomne "færdig" knap, og man bliver returneret 	-->
+		<!-- til menuen. -->
 
-        <form method="get" action="5_eks.htm">  
+        <form id=OpretBruger>
+ 
+            <label>Brugernavn</label><br>
+            <input id = usernameField type="text" name="" /><br>
 
-            <label>BrugerID:</label>
-            <input type="text" name="" />
+            <label>Initialer</label><br> 
+            <input id = initialsField type="text" name="" /><br>
 
-            <label>Brugernavn:</label>
-            <input type="text" name="" />
+            <label>Cpr</label><br>  
+            <input id = CPRField type="text" name="" /><br>
+			<br>
+			
+            <label>Roller</label>
+            <br>
+            <input id = adminTick type="checkbox" name="" value="1" /> Administrator  
+            <br>
+            <input id = foremanTick type="checkbox" name="" value="1" /> Foreman  
+            <br>
+            <input id = operatorTick type="checkbox" name="" value="1" /> Operator  
+            <br>
+            <input id = pharmacistTick type="checkbox" name="" value="1" /> Pharmacist  
+			<br>
+			<br>
 
-            <label>Fornavn:</label>
-            <input type="text" name="" />
-
-            <label>Efternavn:</label>
-            <input type="text" name="" />
-
-            <label>Roller:</label>
-            <input type="checkbox" name="" value="1" />Administrator
-            <input type="checkbox" name="" value="2" />Bruger
-
-            <label>Aktiv:</label>
-            <input type="radio" name="Aktiv" value="Ja">Ja <input type="radio" name="Aktiv" value="Nej">Nej
-
-            <span style="display: block; margin-top: 1rem;">
-                <input class="btn" type="reset" value="Slet">
-                <input class="btn" type="submit" value="Gem �ndringer">
-            </span>
-        </form>
+            <button id=clearForm>Nulstil felter</button>  <button id=createUser>Opret bruger</button>
+            <br>
+            <br>
+		</form>      
+		   
+		<form id=IDPssword>
+            <label id=userIDText>BrugerID:</label><text type="text" name="" /> 
+            <br>
+            <br>
+            <label id=passwordText>Password:</label><text type="text" name="" />
+		</form>
     </div>
-    
