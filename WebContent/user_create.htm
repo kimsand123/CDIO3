@@ -10,32 +10,31 @@ var data = $('#OpretBruger').serializeJSON();
 		type : 'POST',	//Typen af HTTP requestet (GET er default)
 		      
 	success : function(data){//Funktion der skal udføres når data er skrevet
-		if (data==="true"){
-			var returnData = $('#IDPssword').
-			$.ajax({
-				
-				
+		if (data==="true"){//ved ikke om det her virker.
+			$.ajax({				
+				url : 'rest/getIDPsswrd',
+				contentType : 'application/json',
 				type : 'GET',
+				
 			success : function(data2)
-			})
-			
-			//get userpassword and userid
-			//$('#UserIDText').html(""); 
-			//$('#UserIDText').html(userID);
-			//$('#passwordText').html(""); 
-			//$('#passwordText').html(password);
-			
-			
+				$('#IDPssword').deserialize(data2),
+			});
 		}else{
-			//hvis fejl
-			$('#mydiv').html(""); //Manipulerer #mydiv.
-			$('#mydiv').html("kvaddernosse");			
+			//hvis fejl så lave noget med fejl :)
+		
 		}	
 	}
 	});
 	return false; //for at undgå at knappen poster data (default behavior).
 });
 });
+
+(document).ready(function){
+	$('clearForm').click(function(){
+		//load user_create.htm
+		$( "./#content" ).load("user_create.htm"); //????
+	});
+}
 
 </script>
     <div class="page-container">
