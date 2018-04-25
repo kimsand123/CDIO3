@@ -1,81 +1,115 @@
 <!-- User selection -->
 
-<select class="custom-select" id="user-list">
-  <option value="0" selected>Vælg en bruger fra listen</option>
+<select class="custom-select" id="userList">
+	<option value="0" selected>Vælg en bruger fra listen</option>
 </select>
+
+<!-- // User selection -->
 
 <!-- User edit form -->
 
-<form id="user-edit-form" style="display: none;">
-  <div class="form-group">
-    <label for="brugernavn">Brugernavn:</label>
-    <input type="text" class="form-control" id="brugernavn" placeholder="Indtast et brugernavn">
-  </div>
-  <div class="form-group">
-    <label for="ini">INI</label>
-    <input type="text" class="form-control" id="ini" placeholder="Indtast et ini">
-  </div>
-    <div class="form-group">
-    <label for="cpr">CPR</label>
-    <input type="text" class="form-control" id="cpr" placeholder="Indtast et cpr nr.">
-  </div>
-    <div class="form-group">
-    <label for="pass">Adgangskode:</label>
-    <input type="text" class="form-control" id="pass" placeholder="Indtast en adgangskode">
-  </div>
-    <div class="form-group">
-    <label for="roles">Roller:</label>
-    <input type="text" class="form-control" id="roles" placeholder="Indtast roller">
-  </div>
-</form>
+<div id="editUser"></div>
 
-<!-- Submit -->
+<!-- // User edit form -->
 
-<button type="submit" class="btn btn-primary" style="display: none;">Gem data</button>
+<!-- JS -->
 
 <script>
 	$(function() {
 
-		var list = $("#user-list");
-		
-		var users = [			
-			{uid: "Frederik", ini: "FF", cpr: "1212121212", pass: "kode", roles: "admin, gÃ¸gler"},
-			{uid: "Elias", ini: "EE", cpr: "1212121212", pass: "kode", roles: "admin, gÃ¸gler, bager"},
-			{uid: "Kim", ini: "KK", cpr: "1212121212", pass: "kode", roles: "admin, gÃ¸gler, lÃ¸ber"},
-			{uid: "Nicolai", ini: "NN", cpr: "1212121212", pass: "kode", roles: "admin"},
-			{uid: "Kasper", ini: "KK", cpr: "1212121212", pass: "kode", roles: "Kinder"},
-			{uid: "Hjalte", ini: "HH", cpr: "1212121212", pass: "kode", roles: "Hemmelig"}];	
-		
-		var i = 1;
-		
-		users.forEach(function(user) {	
-			
-		    $(list).append('<option value="' + i + '">' + user.uid + '</option>');
-			
-			i++;
+		var url = "rest/user/list";
+		$
+				.getJSON(url)
 
-			});
-		
-		$('#user-list').change(function() {
-			
-			if($(this).val() > 0) {
-				$('#user-edit-form').show()
-				$('.btn-primary').show()
-				$('#brugernavn').attr( 'value', users[$(this).val()-1].uid );
-				$('#ini').attr( 'value', users[$(this).val()-1].ini );
-				$('#cpr').attr( 'value', users[$(this).val()-1].cpr );
-				$('#pass').attr( 'value', users[$(this).val()-1].pass );
-				$('#roles').attr( 'value', users[$(this).val()-1].roles );
-			}
-			else {
-				$('#user-edit-form').hide()
-				$('.btn-primary').hide()
-			}
-			
-			});
-		
+				.done(
+						function(data) {
+
+							var list = $("#userList");
+							var edit = $("#editUser");
+
+							var i = 1;
+
+							data
+									.forEach(function(user) {
+
+										//Cast to string for checking later
+										var str = String(user.roles);
+
+										$(list)
+												.append(
+														'<option value="' + i + '">'
+																+ user.id
+																+ '</option>');
+
+										var s = "<div id='"+user.id+"' class='loader' style='display: none;'>";
+										s += "<form id='' class'' >";
+										//var s = "<form id='user-edit-form' class'"+user.id+"'>";
+										s += "<div class='form-group'>";
+										s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' placeholder='Indtast et bruger id' value='" + user.id + "'>";
+										s += "</div>";
+
+										s += "<div class='form-group'>";
+										s += "<label for='ini'>Brugernavn</label> <input type='text' class='form-control' id='brugernavn' placeholder='Indtast et brugernavn' value='" + user.username + "'>";
+										s += "</div>";
+
+										s += "<div class='form-group'>";
+										s += "<label for='ini'>INI</label> <input type='text' class='form-control' id='ini' placeholder='Indtast et ini' value='" + user.ini + "'>";
+										s += "</div>";
+
+										s += "<div class='form-group'>";
+										s += "<label for='ini'>CPR</label> <input type='text' class='form-control' id='cpr' placeholder='Indtast et cpr nr.' value='" + user.cpr + "'>";
+										s += "</div>";
+
+										s += "<div class='form-group'>";
+										s += "<label for='roles'>Roller:</label>";
+										s += "<br> ";
+
+										// Checking for roles
+
+										if (str.search("Admin") != -1) {
+											s += "<input id='adminTick' type='checkbox' checked='checked' name='' value='1' /> Administrator";
+										} else {
+											s += "<input id='adminTick' type='checkbox' name='' value='1' /> Administrator";
+										}
+										s += "<br>";
+										if (str.search("Foreman") != -1) {
+											s += "<input id='foremanTick' type='checkbox' checked='checked' name='' value='1' /> Foreman";
+										} else {
+											s += "<input id='foremanTick' type='checkbox' name='' value='1' /> Foreman";
+										}
+										s += "<br>";
+										if (str.search("Operator") != -1) {
+											s += "<input id='operatorTick' type='checkbox' checked='checked' name='' value='1' /> Operator";
+										} else {
+											s += "<input id='operatorTick' type='checkbox' name='' value='1' /> Operator";
+										}
+										s += "<br>";
+										if (str.search("Pharmacist") != -1) {
+											s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='' value='1' /> Pharmacist";
+										} else {
+											s += "<input id='pharmacistTick' type='checkbox' name='' value='1' /> Pharmacist";
+										}
+
+										s += "</div>";
+										s += "</form>";
+
+										s += "<button type='submit' class='btn btn-primary'>Gem data</button>";
+										s += "</div>";
+
+										$(edit).append(s);
+
+										i++;
+
+									});
+
+							$('#userList').on('change', function() {
+								//alert( this.value );
+								$('.loader').hide();
+								var edit = "#" + this.value;
+								$(edit).show();
+							});
+
+						});
+
 	});
-	
-	
-    
 </script>
