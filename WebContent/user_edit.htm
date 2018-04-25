@@ -1,25 +1,76 @@
+<select class="custom-select" id="user-list">
+  <option value="0" selected>Vælg en bruger fra listen</option>
+</select>
 
-<form>
-	<div class="form-group">
-		<label for="exampleInputEmail1">Email address</label> <input
-			type="email" class="form-control" id="exampleInputEmail1"
-			aria-describedby="emailHelp" placeholder="Enter email"> <small
-			id="emailHelp" class="form-text text-muted">We'll never share
-			your email with anyone else.</small>
-	</div>
-	<div class="form-group">
-		<label for="exampleInputPassword1">Password</label> <input
-			type="password" class="form-control" id="exampleInputPassword1"
-			placeholder="Password">
-	</div>
-	<div class="form-group form-check">
-		<input type="checkbox" class="form-check-input" id="exampleCheck1">
-		<label class="form-check-label" for="exampleCheck1">Check me
-			out</label>
-	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
+<form id="user-edit-form" style="display: none;">
+  <div class="form-group">
+    <label for="brugernavn">Brugernavn:</label>
+    <input type="text" class="form-control" id="brugernavn" placeholder="Indtast et brugernavn">
+  </div>
+  <div class="form-group">
+    <label for="ini">INI</label>
+    <input type="text" class="form-control" id="ini" placeholder="Indtast et ini">
+  </div>
+    <div class="form-group">
+    <label for="cpr">CPR</label>
+    <input type="text" class="form-control" id="cpr" placeholder="Indtast et cpr nr.">
+  </div>
+    <div class="form-group">
+    <label for="pass">Adgangskode:</label>
+    <input type="text" class="form-control" id="pass" placeholder="Indtast en adgangskode">
+  </div>
+    <div class="form-group">
+    <label for="roles">Roller:</label>
+    <input type="text" class="form-control" id="roles" placeholder="Indtast roller">
+  </div>
 </form>
 
+<button type="submit" class="btn btn-primary" style="display: none;">Gem data</button>
 
+<script>
+	$(function() {
 
+		var list = $("#user-list");
+		
+		var users = [			
+			{uid: "Frederik", ini: "FF", cpr: "1212121212", pass: "kode", roles: "admin, gÃ¸gler"},
+			{uid: "Elias", ini: "EE", cpr: "1212121212", pass: "kode", roles: "admin, gÃ¸gler, bager"},
+			{uid: "Kim", ini: "KK", cpr: "1212121212", pass: "kode", roles: "admin, gÃ¸gler, lÃ¸ber"},
+			{uid: "Nicolai", ini: "NN", cpr: "1212121212", pass: "kode", roles: "admin"},
+			{uid: "Kasper", ini: "KK", cpr: "1212121212", pass: "kode", roles: "Kinder"},
+			{uid: "Hjalte", ini: "HH", cpr: "1212121212", pass: "kode", roles: "Hemmelig"}];	
+		
+		var i = 1;
+		
+		users.forEach(function(user) {	
+			
+		    $(list).append('<option value="' + i + '">' + user.uid + '</option>');
+			
+			i++;
 
+			});
+		
+		
+		$('#user-list').change(function() {
+			
+			if($(this).val() > 0) {
+				$('#user-edit-form').show()
+				$('.btn-primary').show()
+				$('#brugernavn').attr( 'value', users[$(this).val()-1].uid );
+				$('#ini').attr( 'value', users[$(this).val()-1].ini );
+				$('#cpr').attr( 'value', users[$(this).val()-1].cpr );
+				$('#pass').attr( 'value', users[$(this).val()-1].pass );
+				$('#roles').attr( 'value', users[$(this).val()-1].roles );
+			}
+			else {
+				$('#user-edit-form').hide()
+				$('.btn-primary').hide()
+			}
+			
+			});
+		
+	});
+	
+	
+    
+</script>
