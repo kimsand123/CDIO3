@@ -1,42 +1,113 @@
 <table id="user-list" class="table table-hover">
 	<thead>
 		<tr>
+			<th scope="col" class='text-center'>Id</th>
 			<th scope="col">BrugerNavn</th>
-			<th scope="col">INI</th>
-			<th scope="col">CPR</th>
-			<th scope="col">Kodeord</th>
-			<th scope="col">Roller</th>
+			<th scope="col" class="text-center">INI</th>
+			<th scope="col" class="text-center">Rolle(r)</th>
+			<th scope="col" class='text-center'>Slet</th>
 		</tr>
 	</thead>
-	<tbody>		
+	<tbody>
 	</tbody>
 </table>
 
 <script>
 	$(function() {
+	
+		
+		
+		
+		
+		
+		
+		
+		
 
 		var list = $("#user-list tbody");
+
+		var users = [ {
+			id : 1,
+			username : "Frederik",
+			ini : "FF",
+			cpr : "1212121212",
+			pass : "kode",
+			roles : "admin, gøgler"
+		}, {
+			id : 2,
+			username : "Elias",
+			ini : "EE",
+			cpr : "1212121212",
+			pass : "kode",
+			roles : "admin, gøgler, bager"
+		}, {
+			id : 3,
+			username : "Kim",
+			ini : "KK",
+			cpr : "1212121212",
+			pass : "kode",
+			roles : "admin, gøgler, løber"
+		}, {
+			id : 4,
+			username : "Nicolai",
+			ini : "NN",
+			cpr : "1212121212",
+			pass : "kode",
+			roles : "admin"
+		}, {
+			id : 5,
+			username : "Kasper",
+			ini : "KK",
+			cpr : "1212121212",
+			pass : "kode",
+			roles : "Kinder"
+		}, {
+			id : 6,
+			username : "Hjalte",
+			ini : "HH",
+			cpr : "1212121212",
+			pass : "kode",
+			roles : "Hemmelig"
+		} ];
+
+		users.forEach(function(user) {
+
+					var s = "<tr>";
+					s += "<td class='text-center'>" + user.id + "</td>";
+					s += "<td>" + user.username + "</td>";
+					s += "<td class='text-center'>" + user.ini + "</td>";
+					//s += "<td>"+user.cpr+"</td>";
+					//s += "<td>"+user.pass+"</td>";
+					s += "<td class='text-center'>" + user.roles + "</td>";
+					s += "<td class='text-center'><button class='btn btn-danger btn-sm delete-user' data-uid='"+user.id+"'>Slet</button></td>";
+					s += "</tr>";
+
+					list.append(s);
+				});
 		
-		var users = [			
-			{uid: "Frederik", ini: "FF", cpr: "1212121212", pass: "kode", roles: "admin, gøgler"},
-			{uid: "Elias", ini: "EE", cpr: "1212121212", pass: "kode", roles: "admin, gøgler, bager"},
-			{uid: "Kim", ini: "KK", cpr: "1212121212", pass: "kode", roles: "admin, gøgler, løber"},
-			{uid: "Nicolai", ini: "NN", cpr: "1212121212", pass: "kode", roles: "admin"},
-			{uid: "Kasper", ini: "KK", cpr: "1212121212", pass: "kode", roles: "Kinder"},
-			{uid: "Hjalte", ini: "HH", cpr: "1212121212", pass: "kode", roles: "Hemmelig"}];	
 		
-		users.forEach(function(user) {			  
+		
+		
+	
+		
+		// Event handler for button click: "Slet (bruger)"
+		$(".delete-user").on("click", function(sender) {
 			
-			var s = "<tr>";
-			s += "<td>"+user.uid+"</td>";
-			s += "<td>"+user.ini+"</td>";
-			s += "<td>"+user.cpr+"</td>";
-			s += "<td>"+user.pass+"</td>";
-			s += "<td>"+user.roles+"</td>";
-			s += "</tr>";
+			var user_id = $(this).data("uid");
 			
-			list.append(s);
-			});
+			
+			var result = confirm("Vil du virkelig slette bruger " + user_id + "?" );
+			
+			if(result)
+				alert("Du sagde ja");
+			else
+				alert("Du sagde nej");
+			
+		});
+		
+		
+
+
 	});
 </script>
 
