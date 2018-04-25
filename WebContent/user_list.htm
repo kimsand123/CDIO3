@@ -14,99 +14,57 @@
 
 <script>
 	$(function() {
-	
-		
-		
-		
-		
-		
-		
-		
-		
 
-		var list = $("#user-list tbody");
+		var url = "rest/user/list";
+		$
+				.getJSON(url)
 
-		var users = [ {
-			id : 1,
-			username : "Frederik",
-			ini : "FF",
-			cpr : "1212121212",
-			pass : "kode",
-			roles : "admin, gøgler"
-		}, {
-			id : 2,
-			username : "Elias",
-			ini : "EE",
-			cpr : "1212121212",
-			pass : "kode",
-			roles : "admin, gøgler, bager"
-		}, {
-			id : 3,
-			username : "Kim",
-			ini : "KK",
-			cpr : "1212121212",
-			pass : "kode",
-			roles : "admin, gøgler, løber"
-		}, {
-			id : 4,
-			username : "Nicolai",
-			ini : "NN",
-			cpr : "1212121212",
-			pass : "kode",
-			roles : "admin"
-		}, {
-			id : 5,
-			username : "Kasper",
-			ini : "KK",
-			cpr : "1212121212",
-			pass : "kode",
-			roles : "Kinder"
-		}, {
-			id : 6,
-			username : "Hjalte",
-			ini : "HH",
-			cpr : "1212121212",
-			pass : "kode",
-			roles : "Hemmelig"
-		} ];
+				.done(
+						function(data) {
 
-		users.forEach(function(user) {
+							var list = $("#user-list tbody");
 
-					var s = "<tr>";
-					s += "<td class='text-center'>" + user.id + "</td>";
-					s += "<td>" + user.username + "</td>";
-					s += "<td class='text-center'>" + user.ini + "</td>";
-					//s += "<td>"+user.cpr+"</td>";
-					//s += "<td>"+user.pass+"</td>";
-					s += "<td class='text-center'>" + user.roles + "</td>";
-					s += "<td class='text-center'><button class='btn btn-danger btn-sm delete-user' data-uid='"+user.id+"'>Slet</button></td>";
-					s += "</tr>";
+							data
+									.forEach(function(user) {
+										var s = "<tr>";
+										s += "<td class='text-center'>"
+												+ user.id + "</td>";
+										s += "<td>" + user.username + "</td>";
+										s += "<td class='text-center'>"
+												+ user.ini + "</td>";
+										//s += "<td>"+user.cpr+"</td>";
+										//s += "<td>"+user.pass+"</td>";
+										s += "<td class='text-center'>"
+												+ user.roles + "</td>";
+										s += "<td class='text-center'><button class='btn btn-danger btn-sm delete-user' data-uid='"+user.id+"'>Slet</button></td>";
+										s += "</tr>";
 
-					list.append(s);
+										list.append(s);
+									});
+
+							// Event handler for button click: "Slet (bruger)"
+
+							$(".delete-user")
+									.on(
+											"click",
+											function(sender) {
+
+												var user_id = $(this).data(
+														"uid");
+
+												var result = confirm("Vil du virkelig slette bruger "
+														+ user_id + "?");
+
+												if (result)
+													alert("Du sagde ja");
+												else
+													alert("Du sagde nej");
+
+											});
+
+						}).fail(function() {
+					alert("Shit happend!");
 				});
-		
-		
-		
-		
-	
-		
-		// Event handler for button click: "Slet (bruger)"
-		$(".delete-user").on("click", function(sender) {
-			
-			var user_id = $(this).data("uid");
-			
-			
-			var result = confirm("Vil du virkelig slette bruger " + user_id + "?" );
-			
-			if(result)
-				alert("Du sagde ja");
-			else
-				alert("Du sagde nej");
-			
-		});
-		
-		
-
 
 	});
 </script>
