@@ -39,7 +39,7 @@ public class User {
 	}
 
 	@Produces(MediaType.APPLICATION_JSON)
-	@GET	
+	@GET
 	@Path("/list")
 	public Response getHello() {
 
@@ -50,29 +50,18 @@ public class User {
 		}
 
 		return Response.ok(list, MediaType.APPLICATION_JSON).build();
-	}
-	
-	
-	
-	
+	}	
+
 	@DELETE
 	@Path("/delete/{uid}")
-	public ResponseBuilder deleteUser(@PathParam("uid") int uid)
-	{
-		
-		
-		
-		
-		
+	public ResponseBuilder deleteUser(@PathParam("uid") int uid) {
+
 		return Response.ok();
-		
+
 	}
-	
-	
-	
 
 	private UserRestDTO createDTO(UserDTO user) {
 		return new UserRestDTO(user.userId, user.ini, user.userName, user.roles);
 	}
-	
+
 }
