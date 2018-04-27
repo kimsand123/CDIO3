@@ -1,1 +1,66 @@
-Kommer senere :)
+<!DOCTYPE html>
+<html>
+
+<head>
+<body>
+	<table id="user-list" class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col" class='text-center'>Id</th>
+				<th scope="col">BrugerNavn</th>
+				<th scope="col" class="text-center">INI</th>
+				<th scope="col" class="text-center">Rolle(r)</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	<input type="emai" class="form-control" id="userID"
+		placeholder="Indtast Bruger ID">
+
+
+	<button type="button" class="btn btn-danger" id="findUser">Find
+		Bruger</button>
+	<br>
+
+	<button type="button" class="btn btn-danger" id="deleteUser">Slet
+		Bruger</button>
+
+	<script>
+		$(document).ready(function() {
+			$("#deleteUser").hide();
+			$("#user-list").hide();
+
+			$("#findUser").click(function submit() {
+
+				var userID = $("#userID").val();
+				var url = "rest/user/" + userID;
+				var list = $("#user-list tbody");
+				$.getJSON(url).done(function(data) {
+
+					var s = "<tr>";
+					s += "<td class='text-center'>" + data.id + "</td>";
+					s += "<td>" + data.username + "</td>";
+					s += "<td class='text-center'>" + data.ini + "</td>";
+					s += "<td class='text-center'>" + data.roles + "</td>";
+					s += "</tr>";
+
+					list.append(s);
+
+					$("#user-list").show();
+					$("#findUser").hide();
+					$("#deleteUser").show();
+					$("#userID").hide();
+				});
+			});
+		});
+	</script>
+
+
+</body>
+</head>
+</html>
+
+
+
