@@ -59,7 +59,6 @@
 			
 			
 			$("#deleteUser").click(function submit() {	
-				
 				var userID = $("#userID").val();
 				var url = "rest/user/delete/"+ userID;
 				$.ajax({
@@ -67,7 +66,6 @@
 				    type: 'DELETE',
 				    success: function(result) {
 				       alert("User: "+ userID +" Deleted");
-				     
 				    }
 				});
 			});
