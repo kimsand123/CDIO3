@@ -61,7 +61,7 @@
 			$("#deleteUser").click(function submit() {	
 				
 				var userID = $("#userID").val();
-				var url = "rest/user/delete";
+				var url = "rest/user/delete/"+ userID;
 				$.ajax({
 				    url,
 				    type: 'DELETE',
