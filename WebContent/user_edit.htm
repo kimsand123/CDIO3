@@ -93,7 +93,7 @@
 										s += "</div>";
 										s += "</form>";
 
-										s += "<button type='submit' class='btn btn-primary'>Gem data</button>";
+										s += "<button type='submit' class='btn btn-primary' id='"+user.id+"'>Gem data</button>";
 										s += "</div>";
 
 										$(edit).append(s);
@@ -102,11 +102,26 @@
 
 									});
 
-							$('#userList').on('change', function() {
+							$("#userList").on('change', function() {
 								//alert( this.value );
 								$('.loader').hide();
 								var edit = "#" + this.value;
 								$(edit).show();
+							});
+							
+							/* Update choosen user */
+							
+							$(".btn-primary").click(function submit() {	
+								var userID = this.id;
+								var url = "rest/user/update/"+ userID;
+								//alert(url);
+								$.ajax({
+								    url,
+								    type: 'PUT',
+								    success: function(result) {
+								       alert("User: "+ userID +" updated");
+								    }
+								});
 							});
 
 						});
