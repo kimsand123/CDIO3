@@ -43,7 +43,8 @@ public class UserDAOList implements IUserDAO {
 	}
 
 	@Override
-	public void createUser() {
-		list.add(new UserDTO(1000, "PUTIN", "PP", "12312323", "Kode", Arrays.asList("Hund", "Kejser")));
+	public void createUser(String username) {
+
+		list.add(new UserDTO(3333, "Balder", "HH", "666", "diablo", Arrays.asList("Kejser")));
 	}
 }

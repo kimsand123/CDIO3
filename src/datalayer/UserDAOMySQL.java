@@ -22,7 +22,13 @@ public class UserDAOMySQL implements IUserDAO {
 	@Override
 	public void deleteUser(int id) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void createUser(String username) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
