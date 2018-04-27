@@ -11,6 +11,16 @@ public class UserDTO {
 	public String password;
 	public List<String> roles;
 
+	public UserDTO(String username, String ini, String cpr, String password, List<String> roles) {
+
+		this.userId = -1;
+		this.userName = username;
+		this.ini = ini;
+		this.cpr = cpr;
+		this.password = password;
+		this.roles = roles;
+	}
+
 	public UserDTO(int userId, String username, String ini, String cpr, String password, List<String> roles) {
 
 		this.userId = userId;

@@ -1,10 +1,12 @@
 package rest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -27,11 +29,10 @@ public class User {
 		dao = new UserDAOList();
 	}
 
-	
-	
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	@Path("/{uid}")
+	// TODO: Navn skal laves om
 	public Response getHello(@PathParam("uid") int uid) {
 
 		UserDTO user = dao.GetUser(uid);
@@ -44,6 +45,7 @@ public class User {
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	@Path("/list")
+	// TODO: Navn skal laves om
 	public Response getHello() {
 
 		List<UserRestDTO> list = new ArrayList<UserRestDTO>();
@@ -53,18 +55,17 @@ public class User {
 		}
 
 		return Response.ok(list, MediaType.APPLICATION_JSON).build();
-	}	
+	}
 
 	@DELETE
 	@Path("/delete/{uid}")
-	public ResponseBuilder deleteUser(@PathParam("uid") int uid)
-	{
-		
+	public ResponseBuilder deleteUser(@PathParam("uid") int uid) {
+
 		return Response.ok();
 
 	}
-	
-	//@Produces(MediaType.APPLICATION_JSON)
+
+	// @Produces(MediaType.APPLICATION_JSON)
 	@PUT
 	@Path("/update/{uid}")
 	public Response updateUser(@PathParam("uid") int uid) {
@@ -75,7 +76,20 @@ public class User {
 
 		return Response.ok(createDTO(user), MediaType.APPLICATION_JSON).build();
 	}
-	
+
+	// @Produces(MediaType.APPLICATION_JSON)
+	@POST
+	@Path("/create")
+	public Response createUser(@PathParam("username") String username) {
+
+		// create user
+		dao.createUser(username);
+		
+		// get new user for repsone		
+		
+		// TODO: Check for null and if error return correct http error code
+		return Response.ok("OK", MediaType.APPLICATION_JSON).build();
+	}
 
 	private UserRestDTO createDTO(UserDTO user) {
 		return new UserRestDTO(user.userId, user.ini, user.userName, user.roles);
