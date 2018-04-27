@@ -2,12 +2,15 @@ package rest;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import datalayer.UserDAOList;
 import dtos.UserDTO;
@@ -36,7 +39,7 @@ public class User {
 	}
 
 	@Produces(MediaType.APPLICATION_JSON)
-	@GET
+	@GET	
 	@Path("/list")
 	public Response getHello() {
 
@@ -48,8 +51,28 @@ public class User {
 
 		return Response.ok(list, MediaType.APPLICATION_JSON).build();
 	}
+	
+	
+	
+	
+	@DELETE
+	@Path("/delete/{uid}")
+	public ResponseBuilder deleteUser(@PathParam("uid") int uid)
+	{
+		
+		
+		
+		
+		
+		return Response.ok();
+		
+	}
+	
+	
+	
 
 	private UserRestDTO createDTO(UserDTO user) {
 		return new UserRestDTO(user.userId, user.ini, user.userName, user.roles);
 	}
+	
 }

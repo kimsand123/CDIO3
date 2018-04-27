@@ -19,4 +19,10 @@ public class UserDAOMySQL implements IUserDAO {
 		return null;
 	}
 
+	@Override
+	public void deleteUser(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

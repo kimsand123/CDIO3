@@ -52,9 +52,27 @@
 					$("#findUser").hide();
 					$("#deleteUser").show();
 					$("#userID").hide();
+				}).fail(function(){
+					alert("User not found ffffffff");
+				});
+			});
+			
+			
+			$("#deleteUser").click(function submit() {	
+				
+				var userID = $("#userID").val();
+				var url = "rest/user/delete";
+				$.ajax({
+				    url,
+				    type: 'DELETE',
+				    success: function(result) {
+				       alert("User: "+ userID +" Deleted");
+				     
+				    }
 				});
 			});
 		});
+
 	</script>
 
 

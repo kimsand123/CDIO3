@@ -26,4 +26,8 @@ public class UserDAOList implements IUserDAO {
 	public UserDTO GetUser(int id) {
 		return GetUserList().get(--id);
 	}
+	@Override
+	public void deleteUser(int id) {
+		
+	}
 }
