@@ -3,6 +3,7 @@ package rest;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -66,9 +67,11 @@ public class User {
 	// @Produces(MediaType.APPLICATION_JSON)
 	@PUT
 	@Path("/update/{uid}")
-	public Response updateUser(@PathParam("uid") int uid) {
-
-		UserDTO user = dao.GetUser(uid);
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response updateUser(@PathParam("uid") int uid, String data) {
+		
+		UserDTO user = dao.updateUser(uid, data);
 
 		// TODO: Check for null and if error return correct http error code
 
