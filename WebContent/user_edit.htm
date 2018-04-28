@@ -45,7 +45,7 @@
 							s += "<form id='" + user.id + "' class='form' >";
 							//var s = "<form id='user-edit-form' class'"+user.id+"'>";
 							s += "<div class='form-group'>";
-							s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' placeholder='Indtast et bruger id' value='" + user.id + "'>";
+							s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' name='id' placeholder='Indtast et bruger id' value='" + user.id + "'>";
 							s += "</div>";
 
 							s += "<div class='form-group'>";
@@ -53,11 +53,11 @@
 							s += "</div>";
 
 							s += "<div class='form-group'>";
-							s += "<label for='ini'>INI</label> <input type='text' class='form-control' id='ini' placeholder='Indtast et ini' value='" + user.ini + "'>";
+							s += "<label for='ini'>INI</label> <input type='text' class='form-control' id='ini' name='ini' placeholder='Indtast et ini' value='" + user.ini + "'>";
 							s += "</div>";
 
 							s += "<div class='form-group'>";
-							s += "<label for='ini'>CPR</label> <input type='text' class='form-control' id='cpr' placeholder='Indtast et cpr nr.' value='" + user.cpr + "'>";
+							s += "<label for='ini'>CPR</label> <input type='text' class='form-control' id='cpr' name='cpr' placeholder='Indtast et cpr nr.' value='" + user.cpr + "'>";
 							s += "</div>";
 
 							s += "<div class='form-group'>";
@@ -114,11 +114,12 @@
 
 					$(".btn-primary").click(function submit() {
 
-						var ting = $("form").serializeJSON();
 						
 						var userID = this.id;
 
 						var formID = "#" + userID + " input";
+						
+						var ting = $(formID).serializeJSON();
 						
 						var url = "rest/user/update"+formID;
 						
