@@ -114,6 +114,8 @@
 
 					$(".btn-primary").click(function submit() {
 
+						console.log($("form").serializeJSON());
+						
 						var userID = this.id;
 
 						var formID = "#" + userID + " input";
