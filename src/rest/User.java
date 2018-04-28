@@ -1,7 +1,6 @@
 package rest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.ws.rs.DELETE;
@@ -13,8 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
-
 import datalayer.UserDAOList;
 import dtos.UserDTO;
 import interfaces.IUserDAO;
@@ -59,10 +56,11 @@ public class User {
 
 	@DELETE
 	@Path("/delete/{uid}")
-	public ResponseBuilder deleteUser(@PathParam("uid") int uid) {
-
-		return Response.ok();
-
+	public Response deleteUser(@PathParam("uid") int uid) {
+		
+		dao.deleteUser(uid);
+		
+		return Response.ok("OK", MediaType.APPLICATION_JSON).build();
 	}
 
 	// @Produces(MediaType.APPLICATION_JSON)
@@ -84,9 +82,9 @@ public class User {
 
 		// create user
 		dao.createUser(username);
-		
-		// get new user for repsone		
-		
+
+		// get new user for repsone
+
 		// TODO: Check for null and if error return correct http error code
 		return Response.ok("OK", MediaType.APPLICATION_JSON).build();
 	}
