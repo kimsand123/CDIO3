@@ -68,6 +68,7 @@ public class UserDAOList implements IUserDAO {
 	@Override
 	public UserDTO updateUser(int id, String data) {
 
+		//Mangler at opdatere brugerinfo
 		
 		return list.put(id, new UserDTO(1234, "jajaja", "jj", "123", "maestro", Arrays.asList("Administrator")));
 	}
