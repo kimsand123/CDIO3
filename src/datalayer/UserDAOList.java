@@ -64,4 +64,12 @@ public class UserDAOList implements IUserDAO {
 
 		list.put(newId, new UserDTO(3333, "Balder", "HH", "666", "diablo", Arrays.asList("Kejser")));
 	}
+	
+	@Override
+	public UserDTO updateUser(int id, String data) {
+
+		
+		return list.put(id, new UserDTO(1234, "jajaja", "jj", "123", "maestro", Arrays.asList("Administrator")));
+	}
+	
 }

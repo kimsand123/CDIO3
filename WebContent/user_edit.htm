@@ -19,112 +19,184 @@
 
 		var url = "rest/user/list";
 		$
-				.getJSON(url)
+			.getJSON(url)
 
-				.done(
-						function(data) {
+			.done(
+				function(data) {
 
-							var list = $("#userList");
-							var edit = $("#editUser");
+					var list = $("#userList");
+					var edit = $("#editUser");
 
-							var i = 1;
+					var i = 1;
 
-							data
-									.forEach(function(user) {
+					data
+						.forEach(function(user) {
 
-										//Cast to string for checking later
-										var str = String(user.roles);
+							//Cast to string for checking later
+							var str = String(user.roles);
 
-										$(list)
-												.append(
-														'<option value="' + i + '">'
-																+ user.id
-																+ '</option>');
+							$(list)
+								.append(
+									'<option value="' + i + '">'
+									+ user.id
+									+ '</option>');
 
-										var s = "<div id='"+user.id+"' class='loader' style='display: none;'>";
-										s += "<form id='' class'' >";
-										//var s = "<form id='user-edit-form' class'"+user.id+"'>";
-										s += "<div class='form-group'>";
-										s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' placeholder='Indtast et bruger id' value='" + user.id + "'>";
-										s += "</div>";
+							var s = "<div id='" + user.id + "' class='loader' style='display: none;'>";
+							s += "<form id='" + user.id + "' class='form' >";
+							//var s = "<form id='user-edit-form' class'"+user.id+"'>";
+							s += "<div class='form-group'>";
+							s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' placeholder='Indtast et bruger id' value='" + user.id + "'>";
+							s += "</div>";
 
-										s += "<div class='form-group'>";
-										s += "<label for='ini'>Brugernavn</label> <input type='text' class='form-control' id='brugernavn' placeholder='Indtast et brugernavn' value='" + user.username + "'>";
-										s += "</div>";
+							s += "<div class='form-group'>";
+							s += "<label for='ini'>Brugernavn</label> <input type='text' class='form-control' id='brugernavn' name='username' placeholder='Indtast et brugernavn' value='" + user.username + "'>";
+							s += "</div>";
 
-										s += "<div class='form-group'>";
-										s += "<label for='ini'>INI</label> <input type='text' class='form-control' id='ini' placeholder='Indtast et ini' value='" + user.ini + "'>";
-										s += "</div>";
+							s += "<div class='form-group'>";
+							s += "<label for='ini'>INI</label> <input type='text' class='form-control' id='ini' placeholder='Indtast et ini' value='" + user.ini + "'>";
+							s += "</div>";
 
-										s += "<div class='form-group'>";
-										s += "<label for='ini'>CPR</label> <input type='text' class='form-control' id='cpr' placeholder='Indtast et cpr nr.' value='" + user.cpr + "'>";
-										s += "</div>";
+							s += "<div class='form-group'>";
+							s += "<label for='ini'>CPR</label> <input type='text' class='form-control' id='cpr' placeholder='Indtast et cpr nr.' value='" + user.cpr + "'>";
+							s += "</div>";
 
-										s += "<div class='form-group'>";
-										s += "<label for='roles'>Roller:</label>";
-										s += "<br> ";
+							s += "<div class='form-group'>";
+							s += "<label for='roles'>Roller:</label>";
+							s += "<br> ";
 
-										// Checking for roles
+							// Checking for roles
 
-										if (str.search("Admin") != -1) {
-											s += "<input id='adminTick' type='checkbox' checked='checked' name='' value='1' /> Administrator";
-										} else {
-											s += "<input id='adminTick' type='checkbox' name='' value='1' /> Administrator";
-										}
-										s += "<br>";
-										if (str.search("Foreman") != -1) {
-											s += "<input id='foremanTick' type='checkbox' checked='checked' name='' value='1' /> Foreman";
-										} else {
-											s += "<input id='foremanTick' type='checkbox' name='' value='1' /> Foreman";
-										}
-										s += "<br>";
-										if (str.search("Operator") != -1) {
-											s += "<input id='operatorTick' type='checkbox' checked='checked' name='' value='1' /> Operator";
-										} else {
-											s += "<input id='operatorTick' type='checkbox' name='' value='1' /> Operator";
-										}
-										s += "<br>";
-										if (str.search("Pharmacist") != -1) {
-											s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='' value='1' /> Pharmacist";
-										} else {
-											s += "<input id='pharmacistTick' type='checkbox' name='' value='1' /> Pharmacist";
-										}
+							if (str.search("Admin") != -1) {
+								s += "<input id='adminTick' type='checkbox' checked='checked' name='' value='1' /> Administrator";
+							} else {
+								s += "<input id='adminTick' type='checkbox' name='' value='1' /> Administrator";
+							}
+							s += "<br>";
+							if (str.search("Foreman") != -1) {
+								s += "<input id='foremanTick' type='checkbox' checked='checked' name='' value='1' /> Foreman";
+							} else {
+								s += "<input id='foremanTick' type='checkbox' name='' value='1' /> Foreman";
+							}
+							s += "<br>";
+							if (str.search("Operator") != -1) {
+								s += "<input id='operatorTick' type='checkbox' checked='checked' name='' value='1' /> Operator";
+							} else {
+								s += "<input id='operatorTick' type='checkbox' name='' value='1' /> Operator";
+							}
+							s += "<br>";
+							if (str.search("Pharmacist") != -1) {
+								s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='' value='1' /> Pharmacist";
+							} else {
+								s += "<input id='pharmacistTick' type='checkbox' name='' value='1' /> Pharmacist";
+							}
 
-										s += "</div>";
-										s += "</form>";
+							s += "</div>";
+							s += "</form>";
 
-										s += "<button type='submit' class='btn btn-primary' id='"+user.id+"'>Gem data</button>";
-										s += "</div>";
+							s += "<input type='submit' class='btn btn-primary' id='" + user.id + "' value='Gem data'>";
+							s += "</div>";
 
-										$(edit).append(s);
+							$(edit).append(s);
 
-										i++;
-
-									});
-
-							$("#userList").on('change', function() {
-								//alert( this.value );
-								$('.loader').hide();
-								var edit = "#" + this.value;
-								$(edit).show();
-							});
-							
-							/* Update choosen user */
-							
-							$(".btn-primary").click(function submit() {	
-								var userID = this.id;
-								var url = "rest/user/update/"+ userID;
-								//alert(url);
-								$.ajax({
-								    url,
-								    type: 'PUT',
-								    success: function(result) {
-								       alert("User: "+ userID +" updated");
-								    }
-								});
-							});
+							i++;
 
 						});
+
+					
+					$("#userList").on('change', function() {
+						//alert( this.value );
+						$('.loader').hide();
+						var edit = "#" + this.value;
+						$(edit).show();
+					});
+
+					/* Update choosen user */
+
+					$(".btn-primary").click(function submit() {
+
+						var userID = this.id;
+
+						var formID = "#" + userID + " input";
+						
+						var url = "rest/user/update"+formID;
+						
+						alert($(formID).serialize());
+						
+						$.ajax({
+						    headers: { 
+						        'Accept': 'application/json',
+						        'Content-Type': 'application/json' 
+						    },
+							  url,
+							  type: 'PUT',
+							  dataType: "application/json",
+							  data: $(formID).serialize(),
+							  //datatype: 'json',
+							  success: function(result) {
+								  alert("OK")
+								  
+							  }
+							  
+							});
+
+						
+						/*
+						
+						var dataArray = $(formID).serializeArray(),
+							dataObj = {};
+
+						$(dataArray).each(function(i, field) {
+							dataObj[field.name] = field.value;
+						});
+
+						alert(dataObj['username']);
+*/
+
+						/*var data = $('#'+userID).serialize();
+
+						  console.log( data );*/
+
+
+						/*
+						var data = $('#'+userID).serializeArray().reduce(function(obj, item) {
+						    obj[item.name] = item.value;
+						    return obj;
+						}, {});
+						
+						$.each(data, function(index, val) {
+						    console.log(val.category);
+						});*/
+
+					/*
+					                // Grab all values 
+					                var id =  $('#brugerID').val();
+					                var name = $('#brugernavn').val();
+					                var ini = $('#ini').val();
+					                var cpr = $('#cpr').val();
+					                
+					                alert(ini);*/
+					/*
+											var userID = this.id;
+
+											var url = "rest/user/update/" + userID;
+
+											$.ajax({
+												url : url, // url where to submit the request
+												type : "POST", // type of action POST || GET
+												dataType : 'json', // data type
+												data : $("#" + userID).serialize(), // post data || get data
+												success : function(result) {
+													// you can see the result from the console
+													// tab of the developer tools
+													console.log(result);
+												},
+												error : function(xhr, resp, text) {
+													console.log(xhr, resp, text);
+												}
+											})*/
+					});
+
+				});
 
 	});
 </script>
