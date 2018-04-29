@@ -80,8 +80,39 @@ public class UserDAOList implements IUserDAO {
 			String username = jsonNode.get("username").asText();
 			String ini = jsonNode.get("ini").asText();
 			String cpr = jsonNode.get("cpr").asText();
+			
+			List<String> rolesList = new ArrayList<>();
+			
+			/* Check for roles */
+			
+			if (jsonNode.has("admintick")) {	
+				
+				rolesList.add("Administrator");
+				System.out.println("admin!");	
+				
+			} 
+			if (jsonNode.has("foremantick")) {
+				
+				rolesList.add("Foreman");
+				System.out.println("foremantick!");	
+				
+			}
+			if (jsonNode.has("operatortick")) {
+				
+				rolesList.add("Operator");
+				System.out.println("operatortick!");	
+				
+			}
+			if (jsonNode.has("pharmatick")) {
+				
+				rolesList.add("Pharmacist");
+				System.out.println("pharmatick!");	
+				
+			}
+			
 			/* Update user */
-			list.put(id, new UserDTO(id, username, ini, cpr, "yesMAYN", Arrays.asList("Administrator")));
+			
+			list.put(id, new UserDTO(id, username, ini, cpr, "passwd", rolesList));
 			
 		} catch (IOException e) {
 			
