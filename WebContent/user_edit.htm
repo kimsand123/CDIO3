@@ -4,6 +4,10 @@
 	<option value="0" selected>Vælg en bruger fra listen</option>
 </select>
 
+<div class="alert alert-success" id="alert-success" role="alert" style='display: none;'>
+  A simple success alert—check it out!
+</div>
+
 <!-- // User selection -->
 
 <!-- User edit form -->
@@ -11,6 +15,8 @@
 <div id="editUser"></div>
 
 <!-- // User edit form -->
+
+
 
 <!-- JS -->
 
@@ -41,7 +47,7 @@
 									+ user.id
 									+ '</option>');
 
-							var s = "<div id='" + user.id + "' class='loader' style='display: none;'>";
+							var s = "<div id='" + user.id + "' class='loader' style='display: none;'>"; 
 							s += "<form id='" + user.id + "' class='form' >";
 							//var s = "<form id='user-edit-form' class'"+user.id+"'>";
 							s += "<div class='form-group'>";
@@ -67,27 +73,27 @@
 							// Checking for roles
 
 							if (str.search("Admin") != -1) {
-								s += "<input id='adminTick' type='checkbox' checked='checked' name='' value='1' /> Administrator";
+								s += "<input id='adminTick' type='checkbox' checked='checked' name='admintick' value='1' /> Administrator";
 							} else {
 								s += "<input id='adminTick' type='checkbox' name='' value='1' /> Administrator";
 							}
 							s += "<br>";
 							if (str.search("Foreman") != -1) {
-								s += "<input id='foremanTick' type='checkbox' checked='checked' name='' value='1' /> Foreman";
+								s += "<input id='foremanTick' type='checkbox' checked='checked' name='foremantick' value='1' /> Foreman";
 							} else {
 								s += "<input id='foremanTick' type='checkbox' name='' value='1' /> Foreman";
 							}
 							s += "<br>";
 							if (str.search("Operator") != -1) {
-								s += "<input id='operatorTick' type='checkbox' checked='checked' name='' value='1' /> Operator";
+								s += "<input id='operatorTick' type='checkbox' checked='checked' name='operatortick' value='1' /> Operator"; 
 							} else {
 								s += "<input id='operatorTick' type='checkbox' name='' value='1' /> Operator";
 							}
 							s += "<br>";
 							if (str.search("Pharmacist") != -1) {
-								s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='' value='1' /> Pharmacist";
+								s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='pharmatick' value='1' /> Pharmacist";
 							} else {
-								s += "<input id='pharmacistTick' type='checkbox' name='' value='1' /> Pharmacist";
+								s += "<input id='pharmacistTick' type='checkbox' name='' value='1' /> Pharmacist"; 
 							}
 
 							s += "</div>";
@@ -136,68 +142,17 @@
 							  data: ting,
 							  //datatype: 'json',
 							  success: function(result) {
-								  alert("OK") 
+								  $('#alert-success').show();
+								  alert("OK");
 								  
 							  }
 							  
 							});
 
-						
-						/*
-						
-						var dataArray = $(formID).serializeArray(),
-							dataObj = {};
-
-						$(dataArray).each(function(i, field) {
-							dataObj[field.name] = field.value;
-						});
-
-						alert(dataObj['username']);
-*/
-
-						/*var data = $('#'+userID).serialize();
-
-						  console.log( data );*/
-
-
-						/*
-						var data = $('#'+userID).serializeArray().reduce(function(obj, item) {
-						    obj[item.name] = item.value;
-						    return obj;
-						}, {});
-						
-						$.each(data, function(index, val) {
-						    console.log(val.category);
-						});*/
-
-					/*
-					                // Grab all values 
-					                var id =  $('#brugerID').val();
-					                var name = $('#brugernavn').val();
-					                var ini = $('#ini').val();
-					                var cpr = $('#cpr').val();
-					                
-					                alert(ini);*/
-					/*
-											var userID = this.id;
-
-											var url = "rest/user/update/" + userID;
-
-											$.ajax({
-												url : url, // url where to submit the request
-												type : "POST", // type of action POST || GET
-												dataType : 'json', // data type
-												data : $("#" + userID).serialize(), // post data || get data
-												success : function(result) {
-													// you can see the result from the console
-													// tab of the developer tools
-													console.log(result);
-												},
-												error : function(xhr, resp, text) {
-													console.log(xhr, resp, text);
-												}
-											})*/
 					});
+
+					
+
 
 				});
 

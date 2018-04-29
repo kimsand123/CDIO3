@@ -1,10 +1,14 @@
 package datalayer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dtos.UserDTO;
 import interfaces.IUserDAO;
@@ -66,11 +70,50 @@ public class UserDAOList implements IUserDAO {
 	}
 	
 	@Override
-	public UserDTO updateUser(int id, String data) {
-
-		//Mangler at opdatere brugerinfo
+	public void updateUser(String data) {
 		
-		return list.put(id, new UserDTO(1234, "jajaja", "jj", "123", "maestro", Arrays.asList("Administrator")));
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		String json = data;
+		
+		JsonNode jsonNode;
+		
+		try {
+			jsonNode = objectMapper.readTree(json);
+
+			int id = jsonNode.get("id").asInt();
+			String username = jsonNode.get("username").asText();
+			String ini = jsonNode.get("ini").asText();
+			String cpr = jsonNode.get("cpr").asText();
+			
+			list.put(id, new UserDTO(id, username, ini, cpr, "yesMAYN", Arrays.asList("Administrator")));
+			
+		} catch (IOException e2) {
+			
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+			
+		}
+		
+		
+		/*
+		try {
+			
+			UserDTO updateUser = objectMapper.readValue(json, UserDTO.class);
+			
+		} catch (IOException e1) {
+			
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			
+		}
+		
+		
+		int newId = list.size() + 1;
+		list.put(newId, new UserDTO(1111, "Balder", "HH", "666", "diablo", Arrays.asList("Kejser")));
+		//return list.put(newId, updateUser);*/
+
 	}
 	
 }

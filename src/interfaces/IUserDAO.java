@@ -10,5 +10,5 @@ public interface IUserDAO {
 	UserDTO GetUser(int id);
 	void deleteUser(int id);
 	void createUser(String username); 
-	UserDTO updateUser(int id, String data);
+	void updateUser(String data);
 }

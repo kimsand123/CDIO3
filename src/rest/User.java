@@ -1,5 +1,6 @@
 package rest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import datalayer.UserDAOList;
@@ -77,21 +82,11 @@ public class User {
 	@PUT
 	@Path("/update")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML }) 
 	public Response updateUser(String data) {
 		
-		
-		
-		
-		//ObjectMapper objectMapper = new ObjectMapper();
-		
-		
-		System.out.println(data);
-		
-		
-		//UserDTO user = dao.updateUser(uid, data);
+		dao.updateUser(data);
 
-		// TODO: Check for null and if error return correct http error code
 
 		return Response.ok("Data:" + data, MediaType.APPLICATION_JSON).build();
 	}
