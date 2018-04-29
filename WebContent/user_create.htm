@@ -52,6 +52,21 @@
 
 	$("#submitBtn").click(function submit() {
 		
+		var x = $('#brugernavn').val();
+		if (x == "") {
+		    alert("Name must be filled out");
+		    return false;
+		}
+		var y = $('#ini').val();
+		if (y == "") {
+			alert("Initials must be filled out");
+			return false;
+		}
+		var z = $('#cpr').val();
+		if (z == "") {
+			alert("cpr must be filled out");
+			return false;
+		}
 		var ting = $("#OpretBruger input").serializeJSON();
 		
 		var url = "rest/user/create/";
