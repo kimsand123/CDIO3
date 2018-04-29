@@ -81,41 +81,4 @@
     
 });
     
-/*(document).ready(function() { // Sikrer sig at dokumentet er indlæst, 
-	   // før click handlers håndteres
-$('#createUser').click(function() { //Sætter en click handler på knappen
-var data = $('#OpretBruger').serializeJSON();
-	$.ajax({				//Indleder et asynkront ajax kald
-		data : data,
-		url : 'rest/OpretBruger',	//specificerer endpointet				      
-		contentType : 'application/json',
-		type : 'POST',	//Typen af HTTP requestet (GET er default)
-		      
-	success : function(data){//Funktion der skal udføres når data er skrevet
-		if (data==="true"){//ved ikke om det her virker.
-			$.ajax({				
-				url : 'rest/getIDPsswrd',
-				contentType : 'application/json',
-				type : 'GET',
-				
-			success : function(data2)
-				$('#IDPssword').deserialize(data2),
-			});
-		}else{
-			//hvis fejl så lave noget med fejl :)
-		
-		}	
-	}
-	});
-	return false; //for at undgå at knappen poster data (default behavior).
-});
-});
-
-(document).ready(function){
-	$('clearForm').click(function(){
-		//load user_create.htm
-		$( "./#content" ).load("user_create.htm"); //????
-	});
-}
-*/
 </script>
