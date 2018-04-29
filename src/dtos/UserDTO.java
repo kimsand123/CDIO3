@@ -29,7 +29,7 @@ public class UserDTO {
 		this.userName = username;
 		this.ini = ini;
 		this.cpr = cpr;
-		this.password = password;
+		this.password = password; 
 		this.roles = roles;
 	}
 }

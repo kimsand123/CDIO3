@@ -1,12 +1,12 @@
+<div class="alert alert-success" id="alert-success" role="alert" style='display: none;'>
+  A simple success alert—check it out!
+</div>
+
 <!-- User selection -->
 
 <select class="custom-select" id="userList">
 	<option value="0" selected>Vælg en bruger fra listen</option>
 </select>
-
-<div class="alert alert-success" id="alert-success" role="alert" style='display: none;'>
-  A simple success alert—check it out!
-</div>
 
 <!-- // User selection -->
 
@@ -131,6 +131,8 @@
 						
 						//alert($(formID).serialize());
 						
+						$('#alert-success').show();
+						
 						$.ajax({
 						    headers: { 
 						        'Accept': 'application/json',
@@ -142,8 +144,8 @@
 							  data: ting,
 							  //datatype: 'json',
 							  success: function(result) {
-								  $('#alert-success').show();
-								  alert("OK");
+								  //$('#alert-success').show();
+								  alert("OK"); 
 								  
 							  }
 							  

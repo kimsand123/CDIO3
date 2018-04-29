@@ -86,8 +86,6 @@ public class User {
 	public Response updateUser(String data) {
 		
 		dao.updateUser(data);
-
-
 		return Response.ok("Data:" + data, MediaType.APPLICATION_JSON).build();
 	}
 

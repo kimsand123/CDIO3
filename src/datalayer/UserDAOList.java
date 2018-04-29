@@ -89,30 +89,13 @@ public class UserDAOList implements IUserDAO {
 			
 			list.put(id, new UserDTO(id, username, ini, cpr, "yesMAYN", Arrays.asList("Administrator")));
 			
-		} catch (IOException e2) {
+		} catch (IOException e) {
 			
 			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			e.printStackTrace();
 			
 		}
-		
-		
-		/*
-		try {
-			
-			UserDTO updateUser = objectMapper.readValue(json, UserDTO.class);
-			
-		} catch (IOException e1) {
-			
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			
-		}
-		
-		
-		int newId = list.size() + 1;
-		list.put(newId, new UserDTO(1111, "Balder", "HH", "666", "diablo", Arrays.asList("Kejser")));
-		//return list.put(newId, updateUser);*/
+
 
 	}
 	
