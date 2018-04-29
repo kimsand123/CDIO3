@@ -1,5 +1,82 @@
+
+<div class="page-container">
+	<!--Når der trykkes på gem bruger, sendes Brugernavn, initialer og CPR 			-->
+	<!-- samt hvilke roller der er valgt, til backend. Derefter skal der 			-->
+	<!-- hentes password og brugerID og disse skal vises nederst i tekst felter 	-->
+	<!-- samtidig med at man får en besked om at brugeren er blevet oprettet.		-->
+	<!-- Så trykker man på den nyfremkomne "færdig" knap, og man bliver returneret 	-->
+	<!-- til menuen. -->
+
+	<form id="OpretBruger">
+
+		<label>Brugernavn</label><br> 
+		<input id="brugernavn" type="text" name="username" /> <br> 
+		<label>Initialer</label> <br>
+		<input id="ini" type="text" name="ini" /><br> <label>Cpr</label>
+		<br> 
+		<input id="cpr" type="text" name="cpr" /> <br> <br>
+		<label>Roller</label> <br> 
+		<input id='adminTick' type='checkbox' name='admintick'  /> Administrator<br>
+		<input id='foremanTick' type='checkbox' name='foremantick'  /> Foreman<br>
+		<input id='operatorTick' type='checkbox' name='operatortick'  /> Operator<br>
+		<input id='pharmacistTick' type='checkbox' name='pharmatick' /> Pharmacist<br>
+		<br> <br> 
+		<input type="submit" class="btn btn-primary" id="clearForm" value="Nulstil felter">
+		<input type="submit" class="btn btn-primary" id="submitBtn"	value="Opret Bruger">
+		<br> <br>
+	</form>
+
+	<!-- <form id=IDPssword>
+		<label id=userIDText>BrugerID:</label>
+		<text type="text" name="uid" />
+		<br> <br> <label id=passwordText>Password:</label>
+		<text type="text" name="passwd" /> 
+	</form>-->
+</div>
+
 <script>
-(document).ready(function() { // Sikrer sig at dokumentet er indlæst, 
+    
+    $(function() {
+
+        $("form").submit(function(e){
+            //alert('submit intercepted');
+            e.preventDefault(e);
+        });
+    	
+	/* Update choosen user */
+
+	$("#submitBtn").click(function submit() {
+		
+		var ting = $("#OpretBruger input").serializeJSON();
+		
+		var url = "rest/user/create/";
+
+		
+		$('#alert-success').show();
+		
+		$.ajax({
+		    headers: { 
+		        'Accept': 'application/json',
+		        'Content-Type': 'application/json' 
+		    },
+			  url,
+			  type: 'POST',
+			  dataType: "application/json",
+			  data: ting,
+			  //datatype: 'json',
+			  success: function(result) {
+				  //$('#alert-success').show();
+				  alert("OK"); 
+				  
+			  }
+			  
+			});
+
+	});
+    
+});
+    
+/*(document).ready(function() { // Sikrer sig at dokumentet er indlæst, 
 	   // før click handlers håndteres
 $('#createUser').click(function() { //Sætter en click handler på knappen
 var data = $('#OpretBruger').serializeJSON();
@@ -35,49 +112,5 @@ var data = $('#OpretBruger').serializeJSON();
 		$( "./#content" ).load("user_create.htm"); //????
 	});
 }
-
+*/
 </script>
-    <div class="page-container">
-		<!--Når der trykkes på gem bruger, sendes Brugernavn, initialer og CPR 			-->
-		<!-- samt hvilke roller der er valgt, til backend. Derefter skal der 			-->
-		<!-- hentes password og brugerID og disse skal vises nederst i tekst felter 	-->
-		<!-- samtidig med at man får en besked om at brugeren er blevet oprettet.		-->
-		<!-- Så trykker man på den nyfremkomne "færdig" knap, og man bliver returneret 	-->
-		<!-- til menuen. -->
-
-        <form id=OpretBruger>
- 
-            <label>Brugernavn</label><br>
-            <input id = usernameField type="text" name="" /><br>
-
-            <label>Initialer</label><br> 
-            <input id = initialsField type="text" name="" /><br>
-
-            <label>Cpr</label><br>  
-            <input id = CPRField type="text" name="" /><br>
-			<br>
-			
-            <label>Roller</label>
-            <br>
-            <input id = adminTick type="checkbox" name="" value="1" /> Administrator  
-            <br>
-            <input id = foremanTick type="checkbox" name="" value="1" /> Foreman  
-            <br>
-            <input id = operatorTick type="checkbox" name="" value="1" /> Operator  
-            <br>
-            <input id = pharmacistTick type="checkbox" name="" value="1" /> Pharmacist  
-			<br>
-			<br>
-
-            <button id=clearForm>Nulstil felter</button>  <button id=createUser>Opret bruger</button>
-            <br>
-            <br>
-		</form>      
-		   
-		<form id=IDPssword>
-            <label id=userIDText>BrugerID:</label><text type="text" name="" /> 
-            <br>
-            <br>
-            <label id=passwordText>Password:</label><text type="text" name="" />
-		</form>
-    </div>

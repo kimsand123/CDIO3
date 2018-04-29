@@ -92,12 +92,12 @@ public class User {
 	// @Produces(MediaType.APPLICATION_JSON)
 	@POST
 	@Path("/create")
-	public Response createUser(@PathParam("username") String username) {
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML }) 
+	public Response createUser(String data) {
 
 		// create user
-		dao.createUser(username);
-
-		// get new user for repsone
+		dao.createUser(data);
 
 		// TODO: Check for null and if error return correct http error code
 		return Response.ok("OK", MediaType.APPLICATION_JSON).build();
