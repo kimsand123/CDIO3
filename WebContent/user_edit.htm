@@ -1,5 +1,5 @@
 <div class="alert alert-success" id="alert-success" role="alert" style='display: none;'>
-  A simple success alert—check it out!
+  User updated :-)
 </div>
 
 <!-- User selection -->
@@ -51,7 +51,7 @@
 							s += "<form id='" + user.id + "' class='form' >";
 							//var s = "<form id='user-edit-form' class'"+user.id+"'>";
 							s += "<div class='form-group'>";
-							s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' name='id' placeholder='Indtast et bruger id' value='" + user.id + "'>";
+							s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' name='id' placeholder='Indtast et bruger id' value='" + user.id + "' readonly>";
 							s += "</div>";
 
 							s += "<div class='form-group'>";
@@ -68,32 +68,32 @@
 
 							s += "<div class='form-group'>";
 							s += "<label for='roles'>Roller:</label>";
-							s += "<br> ";
+							s += "<br> "; 
 
 							// Checking for roles
 
 							if (str.search("Admin") != -1) {
-								s += "<input id='adminTick' type='checkbox' checked='checked' name='admintick' value='1' /> Administrator";
+								s += "<input id='adminTick' type='checkbox' checked='checked' name='admintick'  /> Administrator";
 							} else {
-								s += "<input id='adminTick' type='checkbox' name='' value='1' /> Administrator";
+								s += "<input id='adminTick' type='checkbox' name='admintick'  /> Administrator";
 							}
 							s += "<br>";
 							if (str.search("Foreman") != -1) {
-								s += "<input id='foremanTick' type='checkbox' checked='checked' name='foremantick' value='1' /> Foreman";
+								s += "<input id='foremanTick' type='checkbox' checked='checked' name='foremantick'  /> Foreman";
 							} else {
-								s += "<input id='foremanTick' type='checkbox' name='' value='1' /> Foreman";
+								s += "<input id='foremanTick' type='checkbox' name='foremantick'  /> Foreman";
 							}
 							s += "<br>";
 							if (str.search("Operator") != -1) {
-								s += "<input id='operatorTick' type='checkbox' checked='checked' name='operatortick' value='1' /> Operator"; 
+								s += "<input id='operatorTick' type='checkbox' checked='checked' name='operatortick'  /> Operator"; 
 							} else {
-								s += "<input id='operatorTick' type='checkbox' name='' value='1' /> Operator";
+								s += "<input id='operatorTick' type='checkbox' name='operatortick'  /> Operator";
 							}
 							s += "<br>";
 							if (str.search("Pharmacist") != -1) {
-								s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='pharmatick' value='1' /> Pharmacist";
+								s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='pharmatick'  /> Pharmacist";
 							} else {
-								s += "<input id='pharmacistTick' type='checkbox' name='' value='1' /> Pharmacist"; 
+								s += "<input id='pharmacistTick' type='checkbox' name='pharmatick' /> Pharmacist"; 
 							}
 
 							s += "</div>";
@@ -127,9 +127,8 @@
 						
 						var ting = $(formID).serializeJSON();
 						
-						var url = "rest/user/update"+formID;
-						
-						//alert($(formID).serialize());
+						var url = "rest/user/update";
+
 						
 						$('#alert-success').show();
 						

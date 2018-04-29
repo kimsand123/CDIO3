@@ -45,9 +45,7 @@ public class UserDAOList implements IUserDAO {
 	@Override
 	public List<UserDTO> GetUserList() {
 		
-		return new ArrayList<UserDTO>(list.values());
-		
-		
+		return new ArrayList<UserDTO>(list.values());		
 		//return Arrays.asList(list.values());
 	}
 
@@ -65,28 +63,24 @@ public class UserDAOList implements IUserDAO {
 	public void createUser(String username) {
 
 		int newId = list.size() + 1;
-
 		list.put(newId, new UserDTO(3333, "Balder", "HH", "666", "diablo", Arrays.asList("Kejser")));
 	}
 	
 	@Override
 	public void updateUser(String data) {
 		
-
 		ObjectMapper objectMapper = new ObjectMapper();
-		
 		String json = data;
-		
 		JsonNode jsonNode;
 		
 		try {
+			
 			jsonNode = objectMapper.readTree(json);
-
 			int id = jsonNode.get("id").asInt();
 			String username = jsonNode.get("username").asText();
 			String ini = jsonNode.get("ini").asText();
 			String cpr = jsonNode.get("cpr").asText();
-			
+			/* Update user */
 			list.put(id, new UserDTO(id, username, ini, cpr, "yesMAYN", Arrays.asList("Administrator")));
 			
 		} catch (IOException e) {
