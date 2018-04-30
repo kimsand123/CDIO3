@@ -17,13 +17,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import datalayer.UserDAOList;
+import dtos.UidPsswrdDTO;
 import dtos.UserDTO;
 import interfaces.IUserDAO;
 import rest.dtos.UserRestDTO;
@@ -95,12 +90,17 @@ public class User {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML }) 
 	public Response createUser(String data) {
+		UidPsswrdDTO uidPassword;
 
-		// create user
-		dao.createUser(data);
-
+		// create user kunne returnere en UIDPSSWD DTO UidPsswdDTO = dao.createUser(data);
+		// lav UidPsswdDTO om til et json object
+		// returner det i linje 101, og skriv det ud i html/jquery.
+		
+		 uidPassword = dao.createUser(data);
 		// TODO: Check for null and if error return correct http error code
-		return Response.ok("OK", MediaType.APPLICATION_JSON).build();
+		return Response.ok(uidPassword).build();
+		
+		
 	}
 
 	private UserRestDTO createDTO(UserDTO user) {

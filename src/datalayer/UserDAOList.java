@@ -12,6 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import dtos.UidPsswrdDTO;
 import dtos.UserDTO;
 import interfaces.IUserDAO;
 
@@ -62,19 +63,24 @@ public class UserDAOList implements IUserDAO {
 	}
 
 	@Override
-	public void createUser(String data) {
+	public UidPsswrdDTO createUser(String data) {
 
+		UidPsswrdDTO uidPssword;
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = data;
 		JsonNode jsonNode;
-		
+
 		int newId = list.size() + 1;
 
 		/* Generate Random passwd */
 
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
 		String randPwd = RandomStringUtils.random( 15, characters );
+
 		
+		uidPssword = new UidPsswrdDTO(newId, randPwd);
+		
+
 		try {
 			jsonNode = objectMapper.readTree(json);
 			int id = newId;
@@ -111,12 +117,16 @@ public class UserDAOList implements IUserDAO {
 
 			list.put(id, new UserDTO(id, username, ini, cpr, randPwd, rolesList));
 
+
 		} catch (IOException e) {
 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
+			
+		} finally {
+			return uidPssword;
 		}
+
 	}
 
 	@Override
