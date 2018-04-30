@@ -14,17 +14,7 @@
 		<div class="row">
 			<div class="col-4">
 				
-				<div id="menucontainer" class="content-wrapper">	
-					<ul style="list-style: none;">			
-					<!-- 	<li><a href="#" class="menu" data-menu="login">Login (Hjalte)</a></li>
-						<li><a href="#" class="menu" data-menu="createUser">Opret bruger (Kim)</a></li>
-						<li><a href="#" class="menu" data-menu="editUser">Rediger bruger (Kasper)</a></li>
-						<li><a href="#" class="menu" data-menu="showUsers">Vis brugere (Frederik)</a></li>
-						<li><a href="#" class="menu" data-menu="deleteUser">Slet bruger (Nicolai)</a></li>
-						<li><a href="#" class="menu" data-menu="logOff">Log ud</a></li>
-						<li><a href="#" class="menu" data-menu="wiki">Wiki: Ting vi bruger!</a></li>			 -->
-					</ul>
-				</div>
+				<div id="menucontainer" class="content-wrapper"></div>
 			
 			</div>
 			<div class="col-8">
@@ -71,7 +61,7 @@
 						$("#welcomepage").load("welcomepage.htm");
 						$("#page_title").text("Logget ind");
 						
-						$("#menucontainer").load("full_menu.htm", function(){
+						$("#menucontainer").load("full_menu.htm?id=" + number, function(){
 							// event handler for menu buttons when clicked!
 							$(".menu").on("click", function(event) {
 								
