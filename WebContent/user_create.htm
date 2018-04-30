@@ -73,9 +73,8 @@
 		
 		var url = "rest/user/create/";
 
-		
 		$('#alert-success').show();
-		
+
 		$.ajax({
 		    headers: { 
 		        'Accept': 'application/json',
@@ -86,9 +85,10 @@
 			  contentType: "application/json",
 			  data : userData,
 			  success : function(result) {
-				  
+
 				 document.getElementById("userIDText").value = result.userId;
 				 document.getElementById("passwordText").value = result.password;	
+				 
 			  }  
 			});
 	});

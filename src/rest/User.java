@@ -40,25 +40,38 @@ public class User {
 	@GET
 	@Path("/{uid}")
 	// TODO: Navn skal laves om
-	public Response getHello(@PathParam("uid") int uid) {
+	public Response getUserWithId(@PathParam("uid") int uid) {
 
 		UserDTO user = dao.GetUser(uid);
 
 		// TODO: Check for null and if error return correct http error code
 
-		return Response.ok(createDTO(user), MediaType.APPLICATION_JSON).build();
+		return Response.ok(createUserRestDTO(user), MediaType.APPLICATION_JSON).build();
 	}
 
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	@Path("/list")
-	// TODO: Navn skal laves om
-	public Response getHello() {
+	public Response getList() {
 
 		List<UserRestDTO> list = new ArrayList<UserRestDTO>();
 
 		for (UserDTO user : dao.GetUserList()) {
-			list.add(createDTO(user));
+			list.add(createUserRestDTO(user));
+		}
+
+		return Response.ok(list, MediaType.APPLICATION_JSON).build();
+	}
+	
+	@Produces(MediaType.APPLICATION_JSON)
+	@GET
+	@Path("/listwCpr")
+	public Response getListWithCpr() {
+		
+		List<UserDTO> list = new ArrayList<UserDTO>();
+		
+		for (UserDTO user : dao.GetUserList()) {
+			list.add(createUserDTO(user));
 		}
 
 		return Response.ok(list, MediaType.APPLICATION_JSON).build();
@@ -84,6 +97,7 @@ public class User {
 		return Response.ok("Data:" + data, MediaType.APPLICATION_JSON).build();
 	}
 
+	
 	// @Produces(MediaType.APPLICATION_JSON)
 	@POST
 	@Path("/create")
@@ -103,8 +117,12 @@ public class User {
 		
 	}
 
-	private UserRestDTO createDTO(UserDTO user) {
-		return new UserRestDTO(user.userId, user.ini, user.userName, user.roles);
+	private UserRestDTO createUserRestDTO(UserDTO user) {
+		return new UserRestDTO(user.id, user.ini, user.username, user.roles);
+	}
+	
+	private UserDTO createUserDTO(UserDTO user) {
+		return new UserDTO(user.id, user.username, user.ini, user.cpr, user.password, user.roles);
 	}
 
 }
