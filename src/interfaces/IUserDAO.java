@@ -10,6 +10,6 @@ public interface IUserDAO {
 	List<UserDTO> GetUserList();
 	UserDTO GetUser(int id);
 	void deleteUser(int id);
-	UidPsswrdDTO createUser(String username); 
+	UserDTO createUser(UserDTO ud); 
 	void updateUser(String data); 
 }
