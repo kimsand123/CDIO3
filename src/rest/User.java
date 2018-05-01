@@ -17,7 +17,6 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 import datalayer.UserDAOList;
-import dtos.UidPsswrdDTO;
 import dtos.UserDTO;
 import interfaces.IUserDAO;
 import rest.dtos.UserRestDTO;
@@ -90,8 +89,10 @@ public class User {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response updateUser(String data) {
-
-		dao.updateUser(data);
+		
+		UserDTO parsedUser = UserDTO.parseFromJSON(data);		
+		
+		dao.updateUser(parsedUser);
 		return Response.ok("Data:" + data, MediaType.APPLICATION_JSON).build();
 	}
 
@@ -100,20 +101,17 @@ public class User {
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createUser(String data) {
-		UidPsswrdDTO uidPassword;
 
 		// create user kunne returnere en UIDPSSWD DTO UidPsswdDTO =
 		// dao.createUser(data);
 		// lav UidPsswdDTO om til et json object
 		// returner det i linje 101, og skriv det ud i html/jquery.
-
 		
 		UserDTO ud = UserDTO.parseFromJSON(data);
 		
 		UserDTO newU = dao.createUser(ud);
 		// TODO: Check for null and if error return correct http error code
 		return Response.ok(newU).build();
-
 	}
 
 	private UserRestDTO createUserRestDTO(UserDTO user) {

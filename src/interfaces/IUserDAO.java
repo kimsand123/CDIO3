@@ -1,8 +1,6 @@
 package interfaces;
 
 import java.util.List;
-
-import dtos.UidPsswrdDTO;
 import dtos.UserDTO;
 
 public interface IUserDAO {
@@ -11,5 +9,5 @@ public interface IUserDAO {
 	UserDTO GetUser(int id);
 	void deleteUser(int id);
 	UserDTO createUser(UserDTO ud); 
-	void updateUser(String data); 
+	void updateUser(UserDTO parsedUser); 
 }

@@ -10,7 +10,6 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dtos.UidPsswrdDTO;
 import dtos.UserDTO;
 import interfaces.IUserDAO;
 
@@ -55,56 +54,12 @@ public class UserDAOList implements IUserDAO {
 	}
 
 	@Override
-	public void updateUser(String data) {
+	public void updateUser(UserDTO user) {
 
-		ObjectMapper objectMapper = new ObjectMapper();
-		String json = data;
-		JsonNode jsonNode;
+		
+			/* Update user */		
 
-		try {
-
-			jsonNode = objectMapper.readTree(json);
-			int id = jsonNode.get("id").asInt();
-			String username = jsonNode.get("username").asText();
-			String ini = jsonNode.get("ini").asText();
-			String cpr = jsonNode.get("cpr").asText();
-
-			List<String> rolesList = new ArrayList<>();
-
-			/* Check for roles */
-
-			if (jsonNode.has("admintick")) {	
-
-				rolesList.add("Administrator");
-
-			} 
-			if (jsonNode.has("foremantick")) {
-
-				rolesList.add("Foreman");
-
-			}
-			if (jsonNode.has("operatortick")) {
-
-				rolesList.add("Operator");	
-
-			}
-			if (jsonNode.has("pharmatick")) {
-
-				rolesList.add("Pharmacist");
-
-			}
-
-			/* Update user */
-
-			list.put(id, new UserDTO(id, username, ini, cpr, "passwd", rolesList));
-
-		} catch (IOException e) {
-
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-
-		}
-
+			list.put(user.id, user);
 	}
 
 }
