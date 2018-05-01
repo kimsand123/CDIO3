@@ -1,6 +1,5 @@
 package rest;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +27,7 @@ public class User {
 
 	@Context
 	Request request;
-	
-	
+
 	IUserDAO dao = null;
 
 	public User() {
@@ -62,14 +60,14 @@ public class User {
 
 		return Response.ok(list, MediaType.APPLICATION_JSON).build();
 	}
-	
+
 	@Produces(MediaType.APPLICATION_JSON)
 	@GET
 	@Path("/listwCpr")
 	public Response getListWithCpr() {
-		
+
 		List<UserDTO> list = new ArrayList<UserDTO>();
-		
+
 		for (UserDTO user : dao.GetUserList()) {
 			list.add(createUserDTO(user));
 		}
@@ -80,47 +78,48 @@ public class User {
 	@DELETE
 	@Path("/delete/{uid}")
 	public Response deleteUser(@PathParam("uid") int uid) {
-		
+
 		dao.deleteUser(uid);
-		
+
 		return Response.ok("OK", MediaType.APPLICATION_JSON).build();
 	}
 
 	// @Produces(MediaType.APPLICATION_JSON)
 	@PUT
 	@Path("/update")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML }) 
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response updateUser(String data) {
-		
+
 		dao.updateUser(data);
 		return Response.ok("Data:" + data, MediaType.APPLICATION_JSON).build();
 	}
 
-	
-	// @Produces(MediaType.APPLICATION_JSON)
 	@POST
 	@Path("/create")
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML }) 
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createUser(String data) {
 		UidPsswrdDTO uidPassword;
 
-		// create user kunne returnere en UIDPSSWD DTO UidPsswdDTO = dao.createUser(data);
+		// create user kunne returnere en UIDPSSWD DTO UidPsswdDTO =
+		// dao.createUser(data);
 		// lav UidPsswdDTO om til et json object
 		// returner det i linje 101, og skriv det ud i html/jquery.
+
 		
-		 uidPassword = dao.createUser(data);
+		UserDTO ud = UserDTO.parseFromJSON(data);
+		
+		UserDTO newU = dao.createUser(ud);
 		// TODO: Check for null and if error return correct http error code
-		return Response.ok(uidPassword).build();
-		
-		
+		return Response.ok(newU).build();
+
 	}
 
 	private UserRestDTO createUserRestDTO(UserDTO user) {
 		return new UserRestDTO(user.id, user.ini, user.username, user.roles);
 	}
-	
+
 	private UserDTO createUserDTO(UserDTO user) {
 		return new UserDTO(user.id, user.username, user.ini, user.cpr, user.password, user.roles);
 	}
