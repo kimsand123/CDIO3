@@ -77,10 +77,26 @@
 							var userData = $("#OpretBruger input")
 									.serializeJSON();
 
-				 document.getElementById("userIDText").value = result.id;
-				 document.getElementById("passwordText").value = result.password;	
-				 
-			  }  
-			});
-	});
-</script>
+							var url = "rest/user/create/";
+
+							$('#alert-success').show();
+
+							$.ajax({
+							    headers: { 
+							        'Accept': 'application/json',
+							        'Content-Type': 'application/json' 
+							    },
+								  url: "rest/user/create/",
+								  method: 'POST',
+								  contentType: "application/json",
+								  data : userData,
+								  success : function(result) {
+
+									 document.getElementById("userIDText").value = result.id;
+									 document.getElementById("passwordText").value = result.password;	
+									 
+								  }  
+								});
+						});
+					});
+					</script>
