@@ -27,8 +27,9 @@
 			class="btn btn-primary" id="submitBtn" value="Opret Bruger">
 
 
-		<br> <br> <input readonly text type="text" name="uid" id=userIDText>BrugerID:</input>
-		<br> <br> <input readonly text type="text" name="passwd" id=passwordText>Password:</input>
+		<br> <br> <input readonly text type="text" name="uid"
+			id=userIDText>BrugerID:</input> <br> <br> <input readonly
+			text type="text" name="passwd" id=passwordText>Password:</input>
 
 
 	</form>
@@ -42,55 +43,63 @@
 </div>
 
 <script>
-    
-    $(function() {
+	$(function() {
 
-        $("form").submit(function(e){
-            //alert('submit intercepted');
-            e.preventDefault(e);
-        });
-    	
-	/* Update choosen user */
+		$("form").submit(function(e) {
+			//alert('submit intercepted');
+			e.preventDefault(e);
+			$("form").trigger("reset");
+		});
 
-	$("#submitBtn").click(function submit() {
-		
-		var x = $('#brugernavn').val();
-		if (x == "") {
-		    alert("Name must be filled out");
-		    return false;
-		}
-		var y = $('#ini').val();
-		if (y == "") {
-			alert("Initials must be filled out");
-			return false;
-		}
-		var z = $('#cpr').val();
-		if (z == "") {
-			alert("cpr must be filled out");
-			return false;
-		}
-		var userData = $("#OpretBruger input").serializeJSON();
-		
-		var url = "rest/user/create/";
+		$("#clearForm").click(function() {
+			$("form").trigger("reset");
+		});
 
-		$('#alert-success').show();
+		$("#submitBtn")
+				.click(
+						function submit() {
 
-		$.ajax({
-		    headers: { 
-		        'Accept': 'application/json',
-		        'Content-Type': 'application/json' 
-		    },
-			  url: "rest/user/create/",
-			  method: 'POST',
-			  contentType: "application/json",
-			  data : userData,
-			  success : function(result) {
+							var x = $('#brugernavn').val();
+							if (x == "") {
+								alert("Name must be filled out");
+								return false;
+							}
+							var y = $('#ini').val();
+							if (y == "") {
+								alert("Initials must be filled out");
+								return false;
+							}
+							var z = $('#cpr').val();
+							if (z == "") {
+								alert("cpr must be filled out");
+								return false;
+							}
+							var userData = $("#OpretBruger input")
+									.serializeJSON();
 
-				 document.getElementById("userIDText").value = result.userId;
-				 document.getElementById("passwordText").value = result.password;	
-				 
-			  }  
-			});
+							var url = "rest/user/create/";
+
+							$('#alert-success').show();
+
+							$
+									.ajax({
+										headers : {
+											'Accept' : 'application/json',
+											'Content-Type' : 'application/json'
+										},
+										url : "rest/user/create/",
+										method : 'POST',
+										contentType : "application/json",
+										data : userData,
+										success : function(result) {
+
+											document
+													.getElementById("userIDText").value = result.userId;
+											document
+													.getElementById("passwordText").value = result.password;
+
+										}
+									});
+						});
 	});
-});
 </script>
