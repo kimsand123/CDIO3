@@ -85,12 +85,15 @@ public class User {
 
 	// @Produces(MediaType.APPLICATION_JSON)
 	@PUT
-	@Path("/update")
+	@Path("/update/{uid}")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateUser(String data) {
+	public Response updateUser(@PathParam("uid") int uid, String data) {
 		
-		UserDTO parsedUser = UserDTO.parseFromJSON(data);		
+		UserDTO parsedUser = UserDTO.parseFromJSON(data);	
+		
+		
+		parsedUser.id=uid;
 		
 		dao.updateUser(parsedUser);
 		return Response.ok("Data:" + data, MediaType.APPLICATION_JSON).build();
