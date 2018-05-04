@@ -1,0 +1,102 @@
+
+<div class="page-container">
+
+	<!-- <div class="alert alert-success" id="alert-success" role="alert"
+		style='display: none;'>User created :-)</div> -->
+
+	<!--Når der trykkes på gem bruger, sendes Brugernavn, initialer og CPR 			-->
+	<!-- samt hvilke roller der er valgt, til backend. Derefter skal der 			-->
+	<!-- hentes password og brugerID og disse skal vises nederst i tekst felter 	-->
+	<!-- samtidig med at man får en besked om at brugeren er blevet oprettet.		-->
+	<!-- Så trykker man på den nyfremkomne "færdig" knap, og man bliver returneret 	-->
+	<!-- til menuen. -->
+
+	<form id="OpretBruger">
+
+		<label>Brugernavn</label><br> <input id="brugernavn" type="text"
+			name="username" /> <br> <label>Initialer</label> <br> <input
+			id="ini" type="text" name="ini" /><br> <label>Cpr</label> <br>
+		<input id="cpr" type="text" name="cpr" /> <br> <br> <label>Roller</label>
+		<br> <input id='adminTick' type='checkbox' name='admintick' />
+		Administrator<br> <input id='foremanTick' type='checkbox'
+			name='foremantick' /> Foreman<br> <input id='operatorTick'
+			type='checkbox' name='operatortick' /> Operator<br> <input
+			id='pharmacistTick' type='checkbox' name='pharmatick' /> Pharmacist<br>
+		<br> <br> <input type="submit" class="btn btn-primary"
+			id="clearForm" value="Nulstil felter"> <input type="submit"
+			class="btn btn-primary" id="submitBtn" value="Opret Bruger">
+
+
+		<br> <br> <input readonly text type="text" name="uid"
+			id=userIDText>BrugerID:</input> <br> <br> <input readonly
+			text type="text" name="passwd" id=passwordText>Password:</input>
+
+
+	</form>
+
+	<!-- <form id=IDPssword>
+		<label id=userIDText>BrugerID:</label>
+		<text type="text" name="uid" />
+		<br> <br> <label id=passwordText>Password:</label>
+		<text type="text" name="passwd" /> 
+	</form>-->
+</div>
+
+<script>
+	$(function() {
+
+		$("form").submit(function(e) {
+			//alert('submit intercepted');
+			e.preventDefault(e);
+			$("form").trigger("reset");
+		});
+
+		$("#clearForm").click(function() {
+			$("form").trigger("reset");
+		});
+
+		$("#submitBtn")
+				.click(
+						function submit() {
+
+							var x = $('#brugernavn').val();
+							if (x == "") {
+								alert("Name must be filled out");
+								return false;
+							}
+							var y = $('#ini').val();
+							if (y == "") {
+								alert("Initials must be filled out");
+								return false;
+							}
+							var z = $('#cpr').val();
+							if (z == "") {
+								alert("cpr must be filled out");
+								return false;
+							}
+							var userData = $("#OpretBruger input")
+									.serializeJSON();
+
+							var url = "rest/user/create/";
+
+							$('#alert-success').show();
+
+							$.ajax({
+							    headers: { 
+							        'Accept': 'application/json',
+							        'Content-Type': 'application/json' 
+							    },
+								  url: "rest/user/create/",
+								  method: 'POST',
+								  contentType: "application/json",
+								  data : userData,
+								  success : function(result) {
+
+									 document.getElementById("userIDText").value = result.id;
+									 document.getElementById("passwordText").value = result.password;	
+									 
+								  }  
+								});
+						});
+					});
+					</script>

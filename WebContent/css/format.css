@@ -1,0 +1,9 @@
+﻿@charset "UTF-8";
+
+label{
+	font-weight: bold;
+}
+
+.content-wrapper{ margin: 2rem 0;}
+
+h1.page_header{font-size: 2rem; margin-bottom 2rem;}

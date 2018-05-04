@@ -1,0 +1,158 @@
+<div class="alert alert-success" id="alert-success" role="alert" style='display: none;'>
+  User updated :-)
+</div>
+
+<!-- User selection -->
+
+<select class="custom-select" id="userList">
+	<option value="0" selected>Vælg en bruger fra listen</option>
+</select>
+
+<!-- // User selection -->
+
+<!-- User edit form -->
+
+<div id="editUser"></div>
+
+<!-- // User edit form -->
+
+
+
+<!-- JS -->
+
+<script>
+	$(function() {
+
+		var url = "rest/user/listwCpr";
+		$
+			.getJSON(url)
+
+			.done(
+				function(data) {
+
+					var listwCpr = $("#userList");
+					var edit = $("#editUser");
+
+					var i = 1;
+
+					data
+						.forEach(function(user) {
+
+							//Cast to string for checking later
+							var str = String(user.roles);
+
+							$(listwCpr)
+								.append(
+									'<option value="' + i + '">'
+									+ user.id
+									+ '</option>');
+
+							var s = "<div id='" + user.id + "' class='loader' style='display: none;'>"; 
+							s += "<form id='" + user.id + "' class='form' >";
+							//var s = "<form id='user-edit-form' class'"+user.id+"'>";
+							s += "<div class='form-group'>";
+							s += "<label for='brugerID'>Id:</label><input type='text' class='form-control' id='brugerID' name='id' placeholder='Indtast et bruger id' value='" + user.id + "' readonly>";
+							s += "</div>";
+
+							s += "<div class='form-group'>";
+							s += "<label for='ini'>Brugernavn</label> <input type='text' class='form-control' id='brugernavn' name='username' placeholder='Indtast et brugernavn' value='" + user.username + "'>";
+							s += "</div>";
+
+							s += "<div class='form-group'>";
+							s += "<label for='ini'>INI</label> <input type='text' class='form-control' id='ini' name='ini' placeholder='Indtast et ini' value='" + user.ini + "'>";
+							s += "</div>";
+
+							s += "<div class='form-group'>";
+							s += "<label for='ini'>CPR</label> <input type='text' class='form-control' id='cpr' name='cpr' placeholder='Indtast et cpr nr.' value='" + user.cpr + "'>";
+							s += "</div>";
+
+							s += "<div class='form-group'>";
+							s += "<label for='roles'>Roller:</label>";
+							s += "<br> "; 
+
+							// Checking for roles
+
+							if (str.search("Admin") != -1) {
+								s += "<input id='adminTick' type='checkbox' checked='checked' name='admintick'  /> Administrator";
+							} else {
+								s += "<input id='adminTick' type='checkbox' name='admintick'  /> Administrator";
+							}
+							s += "<br>";
+							if (str.search("Foreman") != -1) {
+								s += "<input id='foremanTick' type='checkbox' checked='checked' name='foremantick'  /> Foreman";
+							} else {
+								s += "<input id='foremanTick' type='checkbox' name='foremantick'  /> Foreman";
+							}
+							s += "<br>";
+							if (str.search("Operator") != -1) {
+								s += "<input id='operatorTick' type='checkbox' checked='checked' name='operatortick'  /> Operator"; 
+							} else {
+								s += "<input id='operatorTick' type='checkbox' name='operatortick'  /> Operator";
+							}
+							s += "<br>";
+							if (str.search("Pharmacist") != -1) {
+								s += "<input id='pharmacistTick' type='checkbox' checked='checked' name='pharmatick'  /> Pharmacist";
+							} else {
+								s += "<input id='pharmacistTick' type='checkbox' name='pharmatick' /> Pharmacist"; 
+							}
+
+							s += "</div>";
+							s += "</form>";
+
+							s += "<input type='submit' class='btn btn-primary' id='" + user.id + "' value='Gem data'>";
+							s += "</div>";
+
+							$(edit).append(s);
+
+							i++;
+
+						});
+
+					
+					$("#userList").on('change', function() {
+						//alert( this.value );
+						$('.loader').hide();
+						var edit = "#" + this.value;
+						$(edit).show();
+					});
+
+					/* Update choosen user */
+
+					$(".btn-primary").click(function submit() {
+
+						
+						var userID = this.id;
+
+						var formID = "#" + userID + " input";
+						
+						var ting = $(formID).serializeJSON();
+						
+						var url = "rest/user/update/" + userID;
+
+						
+						$('#alert-success').show();
+						
+						$.ajax({
+						    headers: { 
+						        'Accept': 'application/json',
+						        'Content-Type': 'application/json' 
+						    },
+							  url,
+							  type: 'PUT',
+							  contentType: "application/json",
+							  data: ting,
+							  //datatype: 'json',
+							  success: function(result) {
+								  //$('#alert-success').show();
+								  alert("OK"); 
+								  
+							  }
+							  
+							});
+
+					});
+
+				});
+
+	});
+</script>

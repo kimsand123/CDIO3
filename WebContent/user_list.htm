@@ -1,0 +1,74 @@
+<table id="user-list" class="table table-hover">
+	<thead>
+		<tr>
+			<th scope="col" class='text-center'>Id</th>
+			<th scope="col">BrugerNavn</th>
+			<th scope="col" class="text-center">INI</th>
+			<th scope="col" class="text-center">Rolle(r)</th>
+<!-- 			<th scope="col" class='text-center'>Slet</th> -->
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+<script>
+	$(function() {
+
+		var url = "rest/user/list";
+		$
+				.getJSON(url)
+
+				.done(
+						function(data) {
+
+							var list = $("#user-list tbody");
+
+							data
+									.forEach(function(user) {
+										var s = "<tr>";
+										s += "<td class='text-center'>"
+												+ user.id + "</td>";
+										s += "<td>" + user.username + "</td>";
+										s += "<td class='text-center'>"
+												+ user.ini + "</td>";
+										//s += "<td>"+user.cpr+"</td>";
+										//s += "<td>"+user.pass+"</td>";
+										s += "<td class='text-center'>"
+												+ user.roles + "</td>";
+										//s += "<td class='text-center'><button class='btn btn-danger btn-sm delete-user' data-uid='"+user.id+"'>Slet</button></td>";
+										s += "</tr>";
+
+										list.append(s);
+									});
+
+							// Event handler for button click: "Slet (bruger)"
+
+							$(".delete-user")
+									.on(
+											"click",
+											function(sender) {
+
+												var user_id = $(this).data(
+														"uid");
+
+												var result = confirm("Vil du virkelig slette bruger "
+														+ user_id + "?");
+
+												if (result)
+													alert("Du sagde ja");
+												else
+													alert("Du sagde nej"); 
+
+											});
+
+						}).fail(function() {
+					alert("Shit happend!");
+				});
+
+	});
+</script>
+
+
+
+
